@@ -1,0 +1,23 @@
+{
+  "name": "react-flow-experiments",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@cloudscape-design/code-view": "^3.0.142",
+    "@cloudscape-design/components": "^3.0.1311",
+    "@cloudscape-design/global-styles": "^1.0.60",
+    "@xyflow/react": "^12.11.0",
+    "highlight.js": "^11.11.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.16"
+  }
+}

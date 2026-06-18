@@ -1,0 +1,7 @@
+product_id,product_name,category,department,supplier_code,is_active
+PRD-201,Yoga Mat,Fitness Equipment,Sports,SUP-44,true
+PRD-305,Wireless Headphones,Audio,Electronics,SUP-12,true
+PRD-410,Cast Iron Skillet,Cookware,Kitchen,SUP-29,true
+PRD-512,Dish Towel Set,Kitchen Linens,Kitchen,SUP-29,true
+PRD-610,Energy Bar 12pk,Nutrition,Grocery,SUP-71,true
+PRD-999,Legacy Item,Misc,Clearance,SUP-99,false

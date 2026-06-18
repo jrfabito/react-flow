@@ -1,0 +1,94 @@
+/* Lock the page to viewport height so nothing outside tab content scrolls */
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Override React Flow's default pointer cursor on selectable edges */
+.react-flow__edge.selectable {
+  cursor: default;
+}
+
+/* Make all candidate endpoint handles visible and interactive during any drag */
+.react-flow__handle.connectionindicator {
+  opacity: 1 !important;
+  pointer-events: all !important;
+}
+
+/* Keep the handle being dragged from visible */
+.react-flow__handle.connectingfrom {
+  opacity: 1 !important;
+}
+
+/* Valid drop target — green border */
+.react-flow__handle.connectingto.valid {
+  border-color: #22c55e !important;
+}
+
+/* Invalid drop target — red border, white fill */
+.react-flow__handle.connectingto:not(.valid) {
+  border-color: #d91515 !important;
+  background: #fff !important;
+}
+
+/* Larger controls buttons */
+.react-flow__controls-button {
+  width: 40px;
+  height: 40px;
+  padding: 24px;
+}
+
+/* Scale icons inside React Flow control buttons */
+.react-flow__controls-button img {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* ── NodeToolbar action button shadows ────────────────────────────────────── */
+
+.node-toolbar-actions [class*="awsui_button"] {
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+/* ── NodeToolbar Select overrides ─────────────────────────────────────────── */
+
+.node-toolbar [class*="awsui_button-trigger"] {
+  border-width: 2px !important;
+  border-color: rgb(0, 108, 224) !important;
+  border-radius: 24px !important;
+  padding-left: 16px !important;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+.node-toolbar [class*="awsui_button-trigger"]:hover {
+  background-color: #F0FBFF !important;
+  border-color: #002B66 !important;
+  color: #002B66 !important;
+  cursor: pointer !important;
+}
+
+.node-toolbar [class*="awsui_placeholder"] {
+  color: rgb(0, 108, 224) !important;
+  font-weight: bold !important;
+  font-style: normal !important;
+}
+
+.node-toolbar [class*="awsui_button-trigger"]:hover [class*="awsui_placeholder"] {
+  color: #002B66 !important;
+}
+
+.node-toolbar [class*="awsui_dropdown"] img {
+  width: 20px !important;
+  height: 20px !important;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ── S3ResourceSelector: hide the View button ─────────────────────────────── */
+
+.s3-no-view [class*="awsui_view-button"] {
+  display: none !important;
+}

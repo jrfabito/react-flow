@@ -1,0 +1,31 @@
+export const NODE_REGISTRY = {
+  Source: [
+    { id: 's3',       label: 'S3',         description: 'JSON, CSV, or Parquet files stored in S3.',    type: 'Source - S3',         iconType: 's3',       enabled: true },
+    { id: 'rds',      label: 'RDS',        description: 'RDS stream as the data source',                type: 'Source - RDS',        iconType: 'rds',      enabled: true },
+    { id: 'redshift', label: 'Redshift',   description: 'Redshift as the data source',                  type: 'Source - Redshift',   iconType: 'redshift', enabled: false },
+    { id: 'kinesis',  label: 'Kinesis',    description: 'Kinesis stream as the data source',            type: 'Source - Kinesis',    iconType: 'kinesis',  enabled: false },
+    { id: 'kafka',    label: 'Kafka',      description: 'Kafka stream as the data source',              type: 'Source - Kafka',      iconType: 'kafka',    enabled: false },
+    { id: 'dynamodb', label: 'DynamoDB',   description: 'DynamoDB as the data source',                  type: 'Source - DynamoDB',   iconType: 'dynamodb', enabled: false },
+    { id: 'sql',      label: 'SQL Server', description: 'SQL Server as the data source',                type: 'Source - SQL Server', iconType: 'sql',      enabled: false },
+    { id: 'docdb',    label: 'DocDB',      description: 'DocDB as the data source',                     type: 'Source - DocDB',      iconType: 'docdb',    enabled: false },
+    { id: 'mongodb',  label: 'MongoDB',    description: 'MongoDB as the data source',                   type: 'Source - MongoDB',    iconType: 'mongodb',  enabled: false },
+  ],
+  Transform: [
+    { id: 'apply-mapping',          label: 'Apply mapping',          description: 'Map fields to new names and types of your choice.',                type: 'Transform - Apply mapping',          iconType: 'applyMapping',        enabled: true },
+    { id: 'select-fields',          label: 'Select fields',          description: 'Choose which fields you want from your data.',                     type: 'Transform - Select fields',          iconType: 'selectFields',        enabled: false },
+    { id: 'drop-fields',            label: 'Drop fields',            description: 'Remove selected fields from your data.',                           type: 'Transform - Drop fields',            iconType: 'dropFields',          enabled: false },
+    { id: 'rename-fields',          label: 'Rename fields',          description: 'Rename a single data field from your data set.',                   type: 'Transform - Rename fields',          iconType: 'renameFields',        enabled: false },
+    { id: 'spigot',                 label: 'Spigot',                 description: 'Write sample data from a DynamicFrame.',                           type: 'Transform - Spigot',                 iconType: 'spigot',              enabled: false },
+    { id: 'join',                   label: 'Join',                   description: 'Join two sources into one output using a column header.',           type: 'Transform - Join',                   iconType: 'join',                enabled: true },
+    { id: 'union',                  label: 'Union',                  description: 'Combine rows from multiple datasets.',                              type: 'Transform - Union',                  iconType: 'union',               enabled: false },
+    { id: 'split-fields',           label: 'Split fields',           description: 'Split data into two datasets, separating the specified fields.',    type: 'Transform - Split fields',           iconType: 'splitFields',         enabled: false },
+    { id: 'select-from-collection', label: 'Select from collection', description: 'Choose a single DynamicFrame from a collection of DynamicFrames.', type: 'Transform - Select from collection', iconType: 'selectFromCollection', enabled: false },
+    { id: 'filter',                 label: 'Filter',                 description: 'Filter data based on different sets of rules.',                     type: 'Transform - Filter',                 iconType: 'filter',              enabled: true },
+    { id: 'custom-transform',       label: 'Custom transform',       description: 'Custom operation written as code.',                                 type: 'Transform - Custom transform',       iconType: 'customTransform',     enabled: false },
+    { id: 'spark-sql',              label: 'Spark SQL',              description: 'Custom Spark SQL code to execute.',                                 type: 'Transform - Spark SQL',              iconType: 'sparkSql',            enabled: false },
+  ],
+  Target: [
+    { id: 's3-target', label: 'Amazon S3',         description: 'S3 bucket by specifying a bucket path as the data target.', type: 'Target - S3',                iconType: 's3',    enabled: true },
+    { id: 'glue-dc',   label: 'Glue Data Catalog', description: 'Glue Data Catalog table as the data target.',              type: 'Target - Glue Data Catalog', iconType: 'glueDc', enabled: false },
+  ],
+};
