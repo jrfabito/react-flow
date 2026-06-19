@@ -73,7 +73,7 @@ export default function JobsPage() {
 
   const handleOpenJob = async (job) => {
     const canvas = job.canvasRef
-      ? (await import(`../data/${job.canvasRef}`)).default
+      ? await fetch(`/data/${job.canvasRef}`).then(r => r.json())
       : { nodes: [], edges: [] };
     navigate(`/jobs/${job.id}`, { state: { canvas, jobName: job.name } });
   };
