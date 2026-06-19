@@ -66,6 +66,30 @@ function generateRunId() {
   return `GJ-RUN-${suffix}`;
 }
 
+function generateNodeStats(nodes, totalRecords) {
+  const stats = {};
+  nodes.forEach(node => {
+    const isJoin = node.data?.type?.includes('Join') ?? false;
+    const secs   = Math.floor(Math.random() * 35) + 8;
+    const execTime = `${Math.floor(secs / 60)}m ${String(secs % 60).padStart(2, '0')}s`;
+    if (isJoin) {
+      stats[node.id] = {
+        rowsIngestedLeft:  totalRecords,
+        rowsIngestedRight: Math.floor(totalRecords * 0.35),
+        rowsProcessed:     Math.floor(totalRecords * 0.97),
+        nodeExecutionTime: execTime,
+      };
+    } else {
+      stats[node.id] = {
+        rowsIngested:      totalRecords,
+        rowsProcessed:     Math.floor(totalRecords * 0.99),
+        nodeExecutionTime: execTime,
+      };
+    }
+  });
+  return stats;
+}
+
 function makeHighlighter(language) {
   return function highlight(code) {
     const { value } = hljs.highlight(code, { language });
@@ -126,23 +150,27 @@ export default function CreateJobPage() {
   const [hasNodes, setHasNodes] = useState(savedCanvas.nodes.length > 0);
 
   const handleRun = () => {
-    const runId      = generateRunId();
-    const startTime  = new Date();
-    const durationMs = Math.floor(Math.random() * 5 * 60 * 1000) + 60 * 1000;
-    const endTime    = new Date(startTime.getTime() + durationMs);
-    sessionStorage.setItem(CANVAS_STORAGE_KEY, JSON.stringify(latestCanvasState.current));
+    const runId        = generateRunId();
+    const startTime    = new Date();
+    const durationMs   = Math.floor(Math.random() * 5 * 60 * 1000) + 60 * 1000;
+    const endTime      = new Date(startTime.getTime() + durationMs);
+    const totalRecords = Math.floor(Math.random() * 50000) + 1000;
+    const canvas       = latestCanvasState.current;
+    sessionStorage.setItem(CANVAS_STORAGE_KEY, JSON.stringify(canvas));
     navigate(`/runs/${runId}`, {
       state: {
         jobId,
         jobName,
         runId,
-        isLiveRun:    true,
-        canvas:       latestCanvasState.current,
+        returnPath: jobId ? `/jobs/${jobId}` : '/create',
+        isLiveRun: true,
+        canvas,
         status:       'Succeeded',
         startTime:    startTime.toISOString(),
         endTime:      endTime.toISOString(),
-        totalRecords: Math.floor(Math.random() * 50000) + 1000,
+        totalRecords,
         dpuHours:     parseFloat((durationMs / 3600000 * 2).toFixed(3)),
+        nodeStats:    generateNodeStats(canvas.nodes, totalRecords),
       },
     });
   };

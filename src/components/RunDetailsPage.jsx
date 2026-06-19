@@ -281,6 +281,7 @@ export default function RunDetailsPage() {
 
   const jobName      = run?.jobName      ?? '—';
   const jobId        = run?.jobId        ?? null;
+  const returnPath   = run?.returnPath   ?? (jobId ? `/jobs/${jobId}` : '/');
   const canvas       = run?.canvas       ?? null;
   const nodeStats    = run?.nodeStats    ?? {};
   const status       = run?.status       ?? '—';
@@ -423,14 +424,14 @@ export default function RunDetailsPage() {
             items={[
               { text: 'AWS Glue Studio', href: '/'                                  },
               { text: 'Jobs',            href: '/'                                  },
-              { text: jobName,           href: jobId ? `/jobs/${jobId}` : '/'       },
+              { text: jobName,           href: returnPath                           },
               { text: runId ?? '—',      href: '#'                                  },
             ]}
             onFollow={e => {
               e.preventDefault();
               const { href } = e.detail;
-              if (jobId && href === `/jobs/${jobId}`) {
-                navigate(`/jobs/${jobId}`, { state: { canvas, jobName } });
+              if (href === returnPath && returnPath !== '/') {
+                navigate(returnPath, { state: { canvas, jobName } });
               } else {
                 navigate(href);
               }
@@ -502,7 +503,7 @@ export default function RunDetailsPage() {
                 <SpaceBetween direction="horizontal" size="xs">
                   <Button disabled>Stop run</Button>
                   <Button>Clone run</Button>
-                  <Button onClick={() => jobId ? navigate(`/jobs/${jobId}`, { state: { canvas, jobName } }) : navigate('/')}>View job</Button>
+                  <Button onClick={() => navigate(returnPath, { state: { canvas, jobName } })}>View job</Button>
                   <Button variant="primary" iconName="external" iconAlign="right">View output in S3</Button>
                 </SpaceBetween>
               }
