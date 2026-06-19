@@ -5,6 +5,7 @@ import FormField from '@cloudscape-design/components/form-field';
 import Select from '@cloudscape-design/components/select';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import { useNodeForm } from './useNodeForm.js';
+import { wouldCreateCycle } from '../utils/connectionRules.js';
 import joinedCsv from '../data/transactions_joined.csv?raw';
 
 import innerJoinUrl    from '../public/images/Type=Inner-join.svg';
@@ -89,8 +90,8 @@ export default function JoinTransformForm({ node, onUpdate, allNodes = [], allEd
   // Derive upstream schemas from currently configured input nodes
   const leftNode    = allNodes.find(n => n.id === rawConfig.leftInputNodeId);
   const rightNode   = allNodes.find(n => n.id === rawConfig.rightInputNodeId);
-  const leftSchema  = leftNode?.data?.outputSchema  ?? [];
-  const rightSchema = rightNode?.data?.outputSchema ?? [];
+  const leftSchema  = leftNode?.data?.status === 'success'  ? (leftNode?.data?.outputSchema  ?? []) : [];
+  const rightSchema = rightNode?.data?.status === 'success' ? (rightNode?.data?.outputSchema ?? []) : [];
 
   const { config, errors, handleChange, handleConfigChange, atomicUpdate } = useNodeForm(node, onUpdate, [leftSchema, rightSchema]);
 
@@ -110,12 +111,28 @@ export default function JoinTransformForm({ node, onUpdate, allNodes = [], allEd
 
   const keyPairs = config.keyPairs ?? [];
 
-  // Auto-seed one empty key pair when both inputs become set
+  // Auto-seed one empty key pair when both inputs are set and both upstream nodes are ready
   useEffect(() => {
-    if (config.leftInputNodeId && config.rightInputNodeId && keyPairs.length === 0) {
+    const leftReady  = leftNode?.data?.status === 'success';
+    const rightReady = rightNode?.data?.status === 'success';
+    if (config.leftInputNodeId && config.rightInputNodeId && leftReady && rightReady && keyPairs.length === 0) {
       handleConfigChange('keyPairs', [{ leftKey: '', rightKey: '' }]);
     }
-  }, [config.leftInputNodeId, config.rightInputNodeId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [config.leftInputNodeId, config.rightInputNodeId, leftNode?.data?.status, rightNode?.data?.status]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Clear key pairs and output when an upstream node loses success
+  useEffect(() => {
+    if (!rawConfig.leftInputNodeId || !rawConfig.rightInputNodeId) return;
+    const leftReady  = leftNode?.data?.status === 'success';
+    const rightReady = rightNode?.data?.status === 'success';
+    if ((!leftReady || !rightReady) && (rawConfig.keyPairs ?? []).length > 0) {
+      atomicUpdateRef.current({
+        configChanges: { keyPairs: [] },
+        errorChanges:  { keyPairs: null },
+        extraNodeData: { outputSchema: [], previewData: [] },
+      });
+    }
+  }, [leftNode?.data?.status, rightNode?.data?.status]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Canvas → form sync ────────────────────────────────────────────────────
   // When edges connecting to this join node change on the canvas (drag connect /
@@ -160,11 +177,16 @@ export default function JoinTransformForm({ node, onUpdate, allNodes = [], allEd
       const cat = n.data.type?.split(' - ')[0];
       return cat === 'Source' || cat === 'Transform';
     })
-    .map(n => ({ value: n.id, label: n.data.label ?? n.id, description: n.data.type }));
+    .map(n => ({
+      value:       n.id,
+      label:       n.data.label ?? n.id,
+      description: n.data.type,
+      disabled:    wouldCreateCycle(n.id, node.id, allEdges),
+    }));
 
-  // Disable whichever node the other slot already holds
-  const leftOptions  = baseSourceOptions.map(o => ({ ...o, disabled: o.value === config.rightInputNodeId }));
-  const rightOptions = baseSourceOptions.map(o => ({ ...o, disabled: o.value === config.leftInputNodeId  }));
+  // Also disable whichever node the other slot already holds
+  const leftOptions  = baseSourceOptions.map(o => ({ ...o, disabled: o.disabled || o.value === config.rightInputNodeId }));
+  const rightOptions = baseSourceOptions.map(o => ({ ...o, disabled: o.disabled || o.value === config.leftInputNodeId  }));
 
   const selectedJoinType = JOIN_TYPE_OPTIONS.find(o => o.value === (config.joinType ?? 'inner')) ?? null;
   const selectedLeft     = leftOptions.find(o  => o.value === config.leftInputNodeId)  ?? null;
@@ -270,16 +292,6 @@ export default function JoinTransformForm({ node, onUpdate, allNodes = [], allEd
 
   return (
     <SpaceBetween direction="vertical" size="m">
-      <FormField label="Join type" errorText={errors.joinType}>
-        <Select
-          selectedOption={selectedJoinType}
-          onChange={handleJoinTypeChange}
-          options={JOIN_TYPE_OPTIONS}
-          placeholder="Choose join type"
-          triggerVariant="option"
-        />
-      </FormField>
-
       <FormField
         label="Left input data frame"
         description="Source node that provides the left side of the join."
@@ -318,6 +330,16 @@ export default function JoinTransformForm({ node, onUpdate, allNodes = [], allEd
           </div>
           <Button disabled={!config.rightInputNodeId} onClick={handleClearRightInput}>Remove</Button>
         </div>
+      </FormField>
+      <div style={{ borderTop: '1px solid #d1d5db', padding: '0' }} />
+      <FormField label="Join type" errorText={errors.joinType}>
+        <Select
+          selectedOption={selectedJoinType}
+          onChange={handleJoinTypeChange}
+          options={JOIN_TYPE_OPTIONS}
+          placeholder="Choose join type"
+          triggerVariant="option"
+        />
       </FormField>
 
       <FormField label="Join keys" description="Choose a key from each data input to set the condition of the join."errorText={errors.keyPairs}>

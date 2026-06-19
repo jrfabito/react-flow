@@ -2,13 +2,15 @@ import S3SourceForm from './S3SourceForm.jsx';
 import RDSSourceForm from './RDSSourceForm.jsx';
 import JoinTransformForm from './JoinTransformForm.jsx';
 import ApplyMappingTransformForm from './ApplyMappingTransformForm.jsx';
+import S3TargetForm from './S3TargetForm.jsx';
 import FallbackForm from './FallbackForm.jsx';
 
 const FORM_MAP = {
-  'Source - S3':              S3SourceForm,
-  'Source - RDS':             RDSSourceForm,
-  'Transform - Join':         JoinTransformForm,
+  'Source - S3':               S3SourceForm,
+  'Source - RDS':              RDSSourceForm,
+  'Transform - Join':          JoinTransformForm,
   'Transform - Apply mapping': ApplyMappingTransformForm,
+  'Target - S3':               S3TargetForm,
 };
 
 export default function NodeForm({ node, onUpdate, upstreamSchema = [], allNodes = [], allEdges = [], onAddEdge, onRemoveEdge }) {

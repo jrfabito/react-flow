@@ -32,14 +32,14 @@ function findClearPosition(proposedPos, existingNodes, nodeWidth = 280, nodeHeig
   return { x, y };
 }
 
-export default function AuthoringView() {
+export default function AuthoringView({ onCanRunChange, onCanvasStateChange, initialNodes = [], initialEdges = [] }) {
   const [selectedNode, setSelectedNode]       = useState(null);
   const [history, setHistory]                 = useState([]);
   const [future, setFuture]                   = useState([]);
   const [splitPanelOpen, setSplitPanelOpen]   = useState(false);
   const [allNodes, setAllNodes]               = useState([]);
   const [allEdges, setAllEdges]               = useState([]);
-  const [hasEverHadNodes, setHasEverHadNodes] = useState(false);
+  const [hasEverHadNodes, setHasEverHadNodes] = useState(initialNodes.length > 0);
   const defaultPanelWidth                     = Math.round(window.innerWidth / (1 + 1.618));
   const [panelWidth, setPanelWidth]           = useState(defaultPanelWidth);
   const canvasRef        = useRef(null);
@@ -153,6 +153,21 @@ export default function AuthoringView() {
     setSelectedNode(newNode);
     setSplitPanelOpen(true);
   }, [selectedNode, pushHistory]);
+
+  // ── Export JSON ───────────────────────────────────────────────────────────
+
+  const handleExportJson = useCallback(() => {
+    const nodes = canvasRef.current?.getNodes() ?? [];
+    const edges = canvasRef.current?.getEdges() ?? [];
+    const json = JSON.stringify({ nodes, edges }, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'etl-job.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }, []);
 
   // ── Load JSON ─────────────────────────────────────────────────────────────
 
@@ -277,6 +292,19 @@ export default function AuthoringView() {
     if (allNodes.length > 0) setHasEverHadNodes(true);
   }, [allNodes.length]);
 
+  useEffect(() => {
+    const hasSource  = allNodes.some(n => n.data.type?.startsWith('Source'));
+    const hasTarget  = allNodes.some(n => n.data.type?.startsWith('Target'));
+    const allSuccess = allNodes.length > 0 && allNodes.every(n => n.data.status === 'success');
+    const connectedIds = new Set(allEdges.flatMap(e => [e.source, e.target]));
+    const allConnected = allNodes.length > 0 && allNodes.every(n => connectedIds.has(n.id));
+    onCanRunChange?.(hasSource && hasTarget && allSuccess && allConnected);
+  }, [allNodes, allEdges]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    onCanvasStateChange?.({ nodes: allNodes, edges: allEdges });
+  }, [allNodes, allEdges]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // ── Drag handle ────────────────────────────────────────────────────────────
 
   const handleDragStart = (e) => {
@@ -316,14 +344,15 @@ export default function AuthoringView() {
                 onRedo={handleRedo}     canRedo={future.length > 0}
                 onRemove={handleRemove} canRemove={selectedNode !== null}
                 onLoadJson={handleLoadJson}
+                onExportJson={handleExportJson}
                 showGuideAlert={!hasEverHadNodes}
               />
             </div>
           </div>
           <ETLCanvas
             ref={canvasRef}
-            initialNodes={[]}
-            initialEdges={[]}
+            initialNodes={initialNodes}
+            initialEdges={initialEdges}
             nodeTypes={nodeTypes}
             onNodeSelect={handleNodeSelect}
             onPaneClick={handlePaneClick}

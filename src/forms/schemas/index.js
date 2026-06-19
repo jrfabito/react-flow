@@ -20,6 +20,8 @@ export function isFormComplete(type, config, label) {
     }
     case 'Transform - Apply mapping':
       return (config?.mappings ?? []).length > 0;
+    case 'Target - S3':
+      return !!(config?.dataInputNodeId?.trim()) && !!(config?.s3Location?.trim());
     default:
       return false;
   }

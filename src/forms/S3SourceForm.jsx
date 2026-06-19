@@ -47,9 +47,8 @@ const S3_I18N = {
   inContextSelectPlaceholder:         'Choose a version',
   inContextBrowseButton:              'Browse S3',
   inContextLoadingText:               'Loading resource',
-  inContextUriLabel:                  'S3 URI',
   inContextVersionSelectLabel:        'Object version',
-  modalTitle:                         'Choose an S3 object',
+  modalTitle:                         'Choose the data file from S3 you want to use.',
   modalCancelButton:                  'Cancel',
   modalSubmitButton:                  'Choose',
   modalLastUpdatedText:               'Last updated',
@@ -135,8 +134,9 @@ export default function S3SourceForm({ node, onUpdate, upstreamSchema }) {
   };
 
   return (
-    <SpaceBetween direction="vertical" size="s">
-      <FormField errorText={errors.s3Url}>
+    <SpaceBetween direction="vertical" size="m">
+      <div style={{ borderTop: '1px solid #d1d5db', padding: '0' }} />
+      <FormField label="S3 location" description="Choose the data file from S3 you want to use." errorText={errors.s3Url}>
         <div className="s3-no-view">
           <S3ResourceSelector
             resource={{ uri: config.s3Url ?? '' }}

@@ -1,9 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import AppLayoutToolbar from '@cloudscape-design/components/app-layout-toolbar';
+import Box from '@cloudscape-design/components/box';
 import BreadcrumbGroup from '@cloudscape-design/components/breadcrumb-group';
 import Button from '@cloudscape-design/components/button';
 import ButtonDropdown from '@cloudscape-design/components/button-dropdown';
 import Icon from '@cloudscape-design/components/icon';
+import StatusIndicator from '@cloudscape-design/components/status-indicator';
+import Table from '@cloudscape-design/components/table';
 import Tabs from '@cloudscape-design/components/tabs';
 import HelpPanel from '@cloudscape-design/components/help-panel';
 import Link from '@cloudscape-design/components/link';
@@ -14,42 +18,141 @@ import AuthoringView from './AuthoringView.jsx';
 import Header from '@cloudscape-design/components/header';
 import { Badge } from '@cloudscape-design/components';
 import awsLogoUrl from '../public/images/aws-logo.svg';
+import JOBS from '../data/glue-jobs.json';
 import CodeView from '@cloudscape-design/code-view/code-view';
+import SegmentedControl from '@cloudscape-design/components/segmented-control';
 import hljs from 'highlight.js/lib/core';
 import python from 'highlight.js/lib/languages/python';
+import scala from 'highlight.js/lib/languages/scala';
 import 'highlight.js/styles/github.css';
 
 hljs.registerLanguage('python', python);
+hljs.registerLanguage('scala', scala);
 
-function highlightPython(code) {
-  const { value } = hljs.highlight(code, { language: 'python' });
-  const lines = value.split('\n');
-  return (
-    <span>
-      {lines.map((line, i) => (
-        <span key={i} dangerouslySetInnerHTML={{ __html: line || ' ' }} />
-      ))}
-    </span>
-  );
+const CANVAS_STORAGE_KEY = 'glue-studio-canvas';
+
+const STATUS_TYPE_MAP = {
+  'Succeeded': 'success',
+  'Failed':    'error',
+  'Running':   'in-progress',
+  'Stopped':   'stopped',
+  'Pending':   'pending',
+};
+
+function formatDateTime(isoString) {
+  if (!isoString) return '—';
+  return new Date(isoString).toLocaleString('en-US', {
+    month:   'short',
+    day:     'numeric',
+    year:    'numeric',
+    hour:    'numeric',
+    minute:  '2-digit',
+    hour12:  true,
+  });
 }
 
+function formatDuration(startIso, endIso) {
+  if (!startIso || !endIso) return '—';
+  const ms           = new Date(endIso) - new Date(startIso);
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes      = Math.floor(totalSeconds / 60);
+  const seconds      = totalSeconds % 60;
+  return minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
+}
+
+function generateRunId() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const suffix = Array.from({ length: 3 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+  return `GJ-RUN-${suffix}`;
+}
+
+function makeHighlighter(language) {
+  return function highlight(code) {
+    const { value } = hljs.highlight(code, { language });
+    const lines = value.split('\n');
+    return (
+      <span>
+        {lines.map((line, i) => (
+          <span key={i} dangerouslySetInnerHTML={{ __html: line || ' ' }} />
+        ))}
+      </span>
+    );
+  };
+}
+
+const highlightPython = makeHighlighter('python');
+const highlightScala  = makeHighlighter('scala');
+
 const NAV_ITEMS = [
-  { type: 'link', text: 'Jobs',      href: '#/jobs' },
-  { type: 'link', text: 'Monitoring',  href: '#/crawlers' },
+  { type: 'link', text: 'Jobs',       href: '/'          },
+  { type: 'link', text: 'Monitoring', href: '#/crawlers' },
   { type: 'divider' },
-  { type: 'link', text: 'Settings',  href: '#/settings' },
+  { type: 'link', text: 'Settings',   href: '#/settings' },
 ];
 
 export default function CreateJobPage() {
+  const { jobId }              = useParams();
+  const { state: locationState } = useLocation();
+
+  const jobData  = JOBS.find(j => j.id === jobId) ?? null;
+  const jobRuns  = jobData?.runs ?? [];
+
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
-  const [jobName, setJobName] = useState('Create job 01');
+  const [jobName, setJobName] = useState(
+    locationState?.jobName ?? 'My job 01'
+  );
   const [jobNameHovered, setJobNameHovered] = useState(false);
   const [jobNameTouched, setJobNameTouched] = useState(false);
   const jobNameError = jobNameTouched && !jobName.trim();
   const [activeTabId, setActiveTabId] = useState('visual');
+  const [scriptLang, setScriptLang] = useState('python');
+  const [canRun, setCanRun] = useState(false);
+  const [selectedRunItems, setSelectedRunItems] = useState([]);
+  const navigate          = useNavigate();
+  const latestCanvasState = useRef({ nodes: [], edges: [] });
+
+  const savedCanvas = useMemo(() => {
+    if (locationState?.canvas) return locationState.canvas;
+    // Only restore from sessionStorage when editing an existing job (returning from run page)
+    if (jobId) {
+      try {
+        return JSON.parse(sessionStorage.getItem(CANVAS_STORAGE_KEY)) ?? { nodes: [], edges: [] };
+      } catch { /* fall through */ }
+    }
+    return { nodes: [], edges: [] };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const [hasNodes, setHasNodes] = useState(savedCanvas.nodes.length > 0);
+
+  const handleRun = () => {
+    const runId      = generateRunId();
+    const startTime  = new Date();
+    const durationMs = Math.floor(Math.random() * 5 * 60 * 1000) + 60 * 1000;
+    const endTime    = new Date(startTime.getTime() + durationMs);
+    sessionStorage.setItem(CANVAS_STORAGE_KEY, JSON.stringify(latestCanvasState.current));
+    navigate(`/runs/${runId}`, {
+      state: {
+        jobId,
+        jobName,
+        runId,
+        isLiveRun:    true,
+        canvas:       latestCanvasState.current,
+        status:       'Succeeded',
+        startTime:    startTime.toISOString(),
+        endTime:      endTime.toISOString(),
+        totalRecords: Math.floor(Math.random() * 50000) + 1000,
+        dpuHours:     parseFloat((durationMs / 3600000 * 2).toFixed(3)),
+      },
+    });
+  };
   const [jobNameWidth, setJobNameWidth] = useState(0);
   const jobNameSizerRef = useRef(null);
+
+  useEffect(() => {
+    document.body.classList.add('canvas-page');
+    return () => document.body.classList.remove('canvas-page');
+  }, []);
 
   useEffect(() => {
     if (jobNameSizerRef.current) setJobNameWidth(jobNameSizerRef.current.offsetWidth);
@@ -60,7 +163,7 @@ export default function CreateJobPage() {
       <div id="top-nav">
         <TopNavigation
           identity={{
-            href: '#',
+            href: '/',
             logo: { src: awsLogoUrl, alt: 'AWS' },
           }}
           utilities={[
@@ -94,17 +197,17 @@ export default function CreateJobPage() {
         breadcrumbs={
           <BreadcrumbGroup
             items={[
-              { text: 'AWS Glue Studio', href: '#' },
-              { text: 'Jobs',            href: '#/jobs' },
-              { text: 'Create job',      href: '#' },
+              { text: 'AWS Glue Studio', href: '/' },
+              { text: 'Jobs',            href: '/' },
+              { text: jobId ? jobName : 'Create job', href: '#' },
             ]}
             ariaLabel="Breadcrumbs"
           />
         }
         navigation={
           <SideNavigation
-            header={{ text: 'AWS Glue Studio', href: '#' }}
-            activeHref="#/jobs"
+            header={{ text: 'AWS Glue Studio', href: '/' }}
+            activeHref="/"
             items={NAV_ITEMS}
           />
         }
@@ -181,10 +284,11 @@ export default function CreateJobPage() {
                 <ButtonDropdown items={[
                   { id: 'clone',  text: 'Clone job' },
                   { id: 'close-as-script', text: 'Clone job as script', variant: 'normal' },
-                  { id: 'export', text: 'Download script' },
+                  { id: 'export-1', text: 'Download script as Python' },
+                  { id: 'export-2', text: 'Download script as Scala' },
                 ]}>Actions</ButtonDropdown>
                 {/* <Button>Save</Button> */}
-                <Button variant="primary">Run</Button>
+                <Button variant="primary" disabled={!canRun} onClick={handleRun}>Run</Button>
               </SpaceBetween>
             </div>
 
@@ -204,7 +308,12 @@ export default function CreateJobPage() {
             </div>
 
             <div style={{ flex: 1, overflow: 'hidden', display: activeTabId === 'visual' ? 'flex' : 'none', flexDirection: 'column' }}>
-              <AuthoringView />
+              <AuthoringView
+                onCanRunChange={setCanRun}
+                onCanvasStateChange={(state) => { latestCanvasState.current = state; setHasNodes(state.nodes.length > 0); }}
+                initialNodes={savedCanvas.nodes}
+                initialEdges={savedCanvas.edges}
+              />
             </div>
 
             <div style={{ display: activeTabId === 'script' ? 'flex' : 'none', flex: 1, flexDirection: 'column', overflow: 'hidden', width: '100%', padding: '16px 24px 0 48px' }}>
@@ -212,6 +321,14 @@ export default function CreateJobPage() {
                 <Header variant="h2"
                   actions={
                     <SpaceBetween direction="horizontal" size="xs">
+                      <SegmentedControl
+                        selectedId={scriptLang}
+                        onChange={({ detail }) => setScriptLang(detail.selectedId)}
+                        options={[
+                          { id: 'python', text: 'Python' },
+                          { id: 'scala',  text: 'Scala'  },
+                        ]}
+                      />
                       <Button>Clone job as script</Button>
                       <Button iconName="download">Download script</Button>
                     </SpaceBetween>
@@ -221,9 +338,17 @@ export default function CreateJobPage() {
                 </Header>
               </div>
               <div style={{ height: 'calc(100vh - 280px)', overflow: 'auto' }}>
-                <CodeView
-                  highlight={highlightPython}
-                  content={`import sys
+                {!hasNodes ? (
+                  <Box textAlign="center" color="inherit" padding={{ vertical: 'xxl' }}>
+                    <Box variant="strong" color="inherit">No script generated</Box>
+                    <Box variant="p" color="inherit" margin={{ top: 'xs' }}>
+                      Build your ETL job in the <strong>Visual</strong> tab. The generated script will appear here once your job has been configured.
+                    </Box>
+                  </Box>
+                ) : scriptLang === 'python' ? (
+                  <CodeView
+                    highlight={highlightPython}
+                    content={`import sys
 from awsglue.transforms import *
 from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
@@ -317,15 +442,6 @@ MappedDF = MappedDF.drop("timestamp")
 from awsglue.dynamicframe import DynamicFrame
 Mapped = DynamicFrame.fromDF(MappedDF, glueContext, "Mapped")
 
-# ── Transform 3: Filter ───────────────────────────────────────────────────────
-# Remove voided transactions (quantity < 0) and test store records.
-
-Filtered = Filter.apply(
-    frame=Mapped,
-    f=lambda row: row["quantity"] > 0 and row["store_id"] != "TEST",
-    transformation_ctx="Filtered",
-)
-
 # ── Target: Write to S3 as Parquet ────────────────────────────────────────────
 # Partitioned by sale_date and department.
 # Registered in Glue Data Catalog as retail_dw.daily_sales.
@@ -343,13 +459,117 @@ DataSink.setCatalogInfo(
     catalogTableName="daily_sales",
 )
 DataSink.setFormat("glueparquet")
-DataSink.writeFrame(Filtered)
+DataSink.writeFrame(Mapped)
 
 job.commit()
 `}
-                  lineNumbers
-                  wrapLines
-                />
+                    lineNumbers
+                    wrapLines
+                  />
+                ) : (
+                  <CodeView
+                    highlight={highlightScala}
+                    content={`import com.amazonaws.services.glue.GlueContext
+import com.amazonaws.services.glue.util.GlueArgParser
+import com.amazonaws.services.glue.util.Job
+import com.amazonaws.services.glue.util.JsonOptions
+import com.amazonaws.services.glue.DynamicFrame
+import org.apache.spark.SparkContext
+import org.apache.spark.sql.functions._
+import scala.collection.JavaConverters._
+
+object GlueApp {
+  def main(sysArgs: Array[String]): Unit = {
+    val args = GlueArgParser.getResolvedOptions(sysArgs, Seq("JOB_NAME").toArray)
+    val sc: SparkContext = new SparkContext()
+    val glueContext: GlueContext = new GlueContext(sc)
+    val spark = glueContext.getSparkSession
+    Job.init(args("JOB_NAME"), glueContext, args.asJava)
+
+    // ── Source 1: Raw Transactions (S3 - CSV) ───────────────────────────────
+
+    val Transactions = glueContext.getSourceWithFormat(
+      connectionType = "s3",
+      format = "csv",
+      options = JsonOptions("""{"paths": ["s3://retail-raw/transactions/2024-03-15/transactions.csv"], "recurse": true}"""),
+      formatOptions = JsonOptions("""{"withHeader": true, "separator": ",", "quoteChar": "\\""}"""),
+      transformationContext = "Transactions"
+    ).getDynamicFrame()
+
+    // ── Source 2: Product Catalog (RDS) ─────────────────────────────────────
+
+    val Products = glueContext.getSource(
+      connectionType = "mysql",
+      connectionOptions = JsonOptions("""{"useConnectionProperties": "true", "dbtable": "products", "connectionName": "retail-ops-rds"}"""),
+      transformationContext = "Products"
+    ).getDynamicFrame()
+
+    // ── Transform 1: Join Transactions to Product Catalog ───────────────────
+
+    val Joined = Transactions.join(
+      keys1 = Seq("product_id"),
+      keys2 = Seq("product_id"),
+      frame2 = Products,
+      transformationContext = "Joined"
+    )
+
+    // ── Transform 2: Apply Mapping ──────────────────────────────────────────
+    // Rename fields to warehouse conventions, calculate total_amount,
+    // split timestamp into sale_date and sale_time, drop unused columns.
+
+    val Mapped = Joined.applyMapping(
+      mappings = Seq(
+        ("transaction_id", "string", "transaction_id", "string"),
+        ("store_id",       "string", "store_id",       "string"),
+        ("product_id",     "string", "product_id",     "string"),
+        ("product_name",   "string", "product_name",   "string"),
+        ("category",       "string", "category",       "string"),
+        ("department",     "string", "department",     "string"),
+        ("qty",            "long",   "quantity",       "long"),
+        ("unit_price",     "double", "unit_price",     "double"),
+        ("payment_method", "string", "payment_method", "string")
+        // timestamp split handled via Spark below
+        // supplier_code and is_active intentionally dropped
+      ),
+      caseSensitive = false,
+      transformationContext = "Mapped"
+    )
+
+    // Calculate total_amount and split timestamp using Spark
+    var MappedDF = Mapped.toDF()
+    MappedDF = MappedDF.withColumn("total_amount", (col("quantity") * col("unit_price")).cast("double"))
+    MappedDF = MappedDF.withColumn("sale_date", col("timestamp").cast("date"))
+    MappedDF = MappedDF.withColumn("sale_time", col("timestamp").cast("timestamp"))
+    MappedDF = MappedDF.drop("timestamp")
+
+    val MappedFinal = DynamicFrame(MappedDF, glueContext, "Mapped")
+
+    // ── Target: Write to S3 as Parquet ──────────────────────────────────────
+    // Partitioned by sale_date and department.
+    // Registered in Glue Data Catalog as retail_dw.daily_sales.
+
+    val DataSink = glueContext.getSink(
+      connectionType = "s3",
+      options = JsonOptions("""{
+        "path": "s3://retail-warehouse/sales/",
+        "updateBehavior": "UPDATE_IN_DATABASE",
+        "partitionKeys": ["sale_date", "department"],
+        "enableUpdateCatalog": true
+      }"""),
+      transformationContext = "DataSink"
+    )
+    DataSink.setCatalogInfo(catalogDatabase = "retail_dw", catalogTableName = "daily_sales")
+    DataSink.setFormat("glueparquet")
+    DataSink.writeFrame(MappedFinal)
+
+    Job.commit()
+  }
+}
+`}
+                    lineNumbers
+                    wrapLines
+                  />
+                )}
               </div>
             </div>
 
@@ -357,8 +577,80 @@ job.commit()
               Properties panel coming soon.
             </div>
 
-            <div style={{ display: activeTabId === 'run-history' ? 'flex' : 'none', flex: 1, alignItems: 'center', justifyContent: 'center', color: '#5f6b7a' }}>
-              No run history yet.
+            <div style={{ display: activeTabId === 'run-history' ? 'flex' : 'none', flex: 1, flexDirection: 'column', overflow: 'hidden', width: '100%', padding: '16px 24px 0 24px' }}>
+              <div style={{ height: 'calc(100vh - 280px)', overflow: 'auto' }}>
+                <Table
+                  items={jobRuns}
+                  selectionType="single"
+                  selectedItems={selectedRunItems}
+                  onSelectionChange={({ detail }) => setSelectedRunItems(detail.selectedItems)}
+                  trackBy="runId"
+                  columnDefinitions={[
+                    {
+                      id:     'runId',
+                      header: 'Run ID',
+                      cell:   run => (
+                        <Link
+                          href={`/runs/${run.runId}`}
+                          onFollow={e => {
+                            e.preventDefault();
+                            navigate(`/runs/${run.runId}`, { state: { ...run, jobId, jobName, canvas: savedCanvas } });
+                          }}
+                        >
+                          {run.runId}
+                        </Link>
+                      ),
+                    },
+                    {
+                      id:     'status',
+                      header: 'Run status',
+                      cell:   run => (
+                        <StatusIndicator type={STATUS_TYPE_MAP[run.status] ?? 'pending'}>
+                          {run.status}
+                        </StatusIndicator>
+                      ),
+                    },
+                    {
+                      id:     'startTime',
+                      header: 'Start time',
+                      cell:   run => formatDateTime(run.startTime),
+                    },
+                    {
+                      id:     'endTime',
+                      header: 'End time',
+                      cell:   run => formatDateTime(run.endTime),
+                    },
+                    {
+                      id:     'duration',
+                      header: 'Duration',
+                      cell:   run => formatDuration(run.startTime, run.endTime),
+                    },
+                  ]}
+                  header={
+                    <Header
+                      counter={jobRuns.length > 0 ? `(${jobRuns.length})` : undefined}
+                      description="View a history of all runs for this job, including their status and duration."
+                      actions={
+                        <SpaceBetween direction="horizontal" size="xs">
+                          <Button disabled>Stop run</Button>
+                          <Button disabled={selectedRunItems.length === 0}>Clone run</Button>
+                          <Button disabled={selectedRunItems.length === 0} variant="primary" iconName="external" iconAlign="right">View output in S3</Button>
+                        </SpaceBetween>
+                      }
+                    >
+                      Run history
+                    </Header>
+                  }
+                  empty={
+                    <Box textAlign="center" color="inherit" padding={{ vertical: 'xxl' }}>
+                      <Box variant="strong" color="inherit">No job runs yet</Box>
+                      <Box variant="p" color="inherit" margin={{ top: 'xs' }}>
+                        Choose <strong>Run</strong> to start your first job run.
+                      </Box>
+                    </Box>
+                  }
+                />
+              </div>
             </div>
 
             <div style={{ display: activeTabId === 'run-schedule' ? 'flex' : 'none', flex: 1, alignItems: 'center', justifyContent: 'center', color: '#5f6b7a' }}>

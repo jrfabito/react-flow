@@ -1,9 +1,19 @@
-/* Lock the page to viewport height so nothing outside tab content scrolls */
 html, body, #root {
-  height: 100%;
-  overflow: hidden;
   margin: 0;
   padding: 0;
+}
+
+#top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Canvas editor: lock to viewport so the tab layout doesn't scroll */
+body.canvas-page,
+body.canvas-page #root {
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Override React Flow's default pointer cursor on selectable edges */

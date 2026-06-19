@@ -4,12 +4,20 @@ import './canvas.css';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import AuthoringView from './components/AuthoringView.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import JobsPage      from './components/JobsPage.jsx';
 import CreateJobPage from './components/CreateJobPage.jsx';
+import RunDetailsPage from './components/RunDetailsPage.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <CreateJobPage />
-    {/* <AuthoringView /> */}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/"              element={<JobsPage />}      />
+        <Route path="/create"        element={<CreateJobPage />} />
+        <Route path="/jobs/:jobId"   element={<CreateJobPage />} />
+        <Route path="/runs/:runId"   element={<RunDetailsPage />} />
+      </Routes>
+    </BrowserRouter>
   </StrictMode>
 );

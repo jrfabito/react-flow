@@ -1,0 +1,406 @@
+[
+  {
+    "id": "job-retail-daily-sales",
+    "name": "Retail Daily Sales ETL",
+    "description": "Ingests daily transaction CSV files from S3, enriches with the RDS product catalog, and writes partitioned Parquet to the data warehouse.",
+    "lastModified": "2026-06-17T14:23:00Z",
+    "canvasRef": "etl-job.json",
+    "runs": [
+      {
+        "runId": "GJ-RUN-K4P",
+        "status": "Succeeded",
+        "startTime": "2026-06-17T02:00:08Z",
+        "endTime": "2026-06-17T02:04:51Z",
+        "totalRecords": 24819,
+        "dpuHours": 0.161,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 24819, "rowsProcessed": 24819, "nodeExecutionTime": "0m 22s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 15s" },
+          "node-1781836704560": { "rowsIngestedLeft": 24819, "rowsIngestedRight": 8801, "rowsProcessed": 24312, "nodeExecutionTime": "0m 38s" },
+          "node-1781836731170": { "rowsIngested": 24312, "rowsProcessed": 24312, "nodeExecutionTime": "0m 11s" },
+          "node-1781836755171": { "rowsIngested": 24312, "rowsProcessed": 24312, "nodeExecutionTime": "0m 19s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-M2R",
+        "status": "Succeeded",
+        "startTime": "2026-06-16T02:00:11Z",
+        "endTime": "2026-06-16T02:05:03Z",
+        "totalRecords": 31204,
+        "dpuHours": 0.168,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 31204, "rowsProcessed": 31204, "nodeExecutionTime": "0m 24s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 14s" },
+          "node-1781836704560": { "rowsIngestedLeft": 31204, "rowsIngestedRight": 8801, "rowsProcessed": 30891, "nodeExecutionTime": "0m 44s" },
+          "node-1781836731170": { "rowsIngested": 30891, "rowsProcessed": 30891, "nodeExecutionTime": "0m 13s" },
+          "node-1781836755171": { "rowsIngested": 30891, "rowsProcessed": 30891, "nodeExecutionTime": "0m 22s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-X9T",
+        "status": "Failed",
+        "errorNodeId": "node-1781836704560",
+        "startTime": "2026-06-15T02:00:05Z",
+        "endTime": "2026-06-15T02:01:22Z",
+        "totalRecords": 0,
+        "dpuHours": 0.046,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 24104, "rowsProcessed": 24104, "nodeExecutionTime": "0m 19s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 14s" },
+          "node-1781836704560": { "rowsIngestedLeft": 24104, "rowsIngestedRight": 8801, "rowsProcessed": 0, "nodeExecutionTime": "0m 04s" },
+          "node-1781836731170": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null },
+          "node-1781836755171": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null }
+        }
+      },
+      {
+        "runId": "GJ-RUN-B7N",
+        "status": "Succeeded",
+        "startTime": "2026-06-14T02:00:09Z",
+        "endTime": "2026-06-14T02:04:38Z",
+        "totalRecords": 28471,
+        "dpuHours": 0.155,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 28471, "rowsProcessed": 28471, "nodeExecutionTime": "0m 21s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 13s" },
+          "node-1781836704560": { "rowsIngestedLeft": 28471, "rowsIngestedRight": 8801, "rowsProcessed": 28104, "nodeExecutionTime": "0m 41s" },
+          "node-1781836731170": { "rowsIngested": 28104, "rowsProcessed": 28104, "nodeExecutionTime": "0m 12s" },
+          "node-1781836755171": { "rowsIngested": 28104, "rowsProcessed": 28104, "nodeExecutionTime": "0m 20s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-Q1W",
+        "status": "Succeeded",
+        "startTime": "2026-06-13T02:00:14Z",
+        "endTime": "2026-06-13T02:06:17Z",
+        "totalRecords": 41032,
+        "dpuHours": 0.207,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 41032, "rowsProcessed": 41032, "nodeExecutionTime": "0m 28s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 15s" },
+          "node-1781836704560": { "rowsIngestedLeft": 41032, "rowsIngestedRight": 8801, "rowsProcessed": 40219, "nodeExecutionTime": "0m 52s" },
+          "node-1781836731170": { "rowsIngested": 40219, "rowsProcessed": 40219, "nodeExecutionTime": "0m 16s" },
+          "node-1781836755171": { "rowsIngested": 40219, "rowsProcessed": 40219, "nodeExecutionTime": "0m 25s" }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job-customer-360",
+    "name": "Customer 360 Aggregation",
+    "description": "Joins customer profiles, purchase history, and support tickets to build a unified customer view for the analytics layer.",
+    "lastModified": "2026-06-15T09:45:00Z",
+    "canvasRef": "three-node.json",
+    "runs": [
+      {
+        "runId": "GJ-RUN-H3C",
+        "status": "Succeeded",
+        "startTime": "2026-06-15T06:00:22Z",
+        "endTime": "2026-06-15T06:18:47Z",
+        "totalRecords": 198340,
+        "dpuHours": 0.623,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 198340, "rowsProcessed": 198340, "nodeExecutionTime": "1m 52s" },
+          "node-1781836731170": { "rowsIngested": 198340, "rowsProcessed": 197918, "nodeExecutionTime": "0m 44s" },
+          "node-1781836755171": { "rowsIngested": 197918, "rowsProcessed": 197918, "nodeExecutionTime": "1m 08s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-F6D",
+        "status": "Succeeded",
+        "startTime": "2026-06-08T06:00:18Z",
+        "endTime": "2026-06-08T06:17:55Z",
+        "totalRecords": 195812,
+        "dpuHours": 0.598,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 195812, "rowsProcessed": 195812, "nodeExecutionTime": "1m 48s" },
+          "node-1781836731170": { "rowsIngested": 195812, "rowsProcessed": 195401, "nodeExecutionTime": "0m 43s" },
+          "node-1781836755171": { "rowsIngested": 195401, "rowsProcessed": 195401, "nodeExecutionTime": "1m 05s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-L5A",
+        "status": "Succeeded",
+        "startTime": "2026-06-01T06:00:31Z",
+        "endTime": "2026-06-01T06:21:04Z",
+        "totalRecords": 202107,
+        "dpuHours": 0.701,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 202107, "rowsProcessed": 202107, "nodeExecutionTime": "1m 58s" },
+          "node-1781836731170": { "rowsIngested": 202107, "rowsProcessed": 201643, "nodeExecutionTime": "0m 46s" },
+          "node-1781836755171": { "rowsIngested": 201643, "rowsProcessed": 201643, "nodeExecutionTime": "1m 12s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-Z2E",
+        "status": "Stopped",
+        "startTime": "2026-05-25T06:00:09Z",
+        "endTime": "2026-05-25T06:09:33Z",
+        "totalRecords": 87644,
+        "dpuHours": 0.319,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 90012, "rowsProcessed": 90012, "nodeExecutionTime": "0m 51s" },
+          "node-1781836731170": { "rowsIngested": 87644, "rowsProcessed": 87644, "nodeExecutionTime": "0m 19s" },
+          "node-1781836755171": { "rowsIngested": 87644, "rowsProcessed": 0,      "nodeExecutionTime": null }
+        }
+      },
+      {
+        "runId": "GJ-RUN-V8G",
+        "status": "Succeeded",
+        "startTime": "2026-05-18T06:00:14Z",
+        "endTime": "2026-05-18T06:16:28Z",
+        "totalRecords": 191530,
+        "dpuHours": 0.548,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 191530, "rowsProcessed": 191530, "nodeExecutionTime": "1m 44s" },
+          "node-1781836731170": { "rowsIngested": 191530, "rowsProcessed": 191102, "nodeExecutionTime": "0m 41s" },
+          "node-1781836755171": { "rowsIngested": 191102, "rowsProcessed": 191102, "nodeExecutionTime": "0m 59s" }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job-inventory-sync",
+    "name": "Inventory Sync Pipeline",
+    "description": "Synchronizes warehouse inventory levels from multiple RDS sources into a consolidated S3 dataset refreshed every four hours.",
+    "lastModified": "2026-06-12T16:10:00Z",
+    "canvasRef": "three-node.json",
+    "runs": [
+      {
+        "runId": "GJ-RUN-T7U",
+        "status": "Succeeded",
+        "startTime": "2026-06-12T16:00:06Z",
+        "endTime": "2026-06-12T16:02:41Z",
+        "totalRecords": 8204,
+        "dpuHours": 0.089,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 8204, "rowsProcessed": 8204, "nodeExecutionTime": "0m 09s" },
+          "node-1781836731170": { "rowsIngested": 8204, "rowsProcessed": 8201, "nodeExecutionTime": "0m 04s" },
+          "node-1781836755171": { "rowsIngested": 8201, "rowsProcessed": 8201, "nodeExecutionTime": "0m 07s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-P4S",
+        "status": "Succeeded",
+        "startTime": "2026-06-12T12:00:03Z",
+        "endTime": "2026-06-12T12:02:58Z",
+        "totalRecords": 7918,
+        "dpuHours": 0.099,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 7918, "rowsProcessed": 7918, "nodeExecutionTime": "0m 09s" },
+          "node-1781836731170": { "rowsIngested": 7918, "rowsProcessed": 7915, "nodeExecutionTime": "0m 04s" },
+          "node-1781836755171": { "rowsIngested": 7915, "rowsProcessed": 7915, "nodeExecutionTime": "0m 07s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-J9B",
+        "status": "Failed",
+        "errorNodeId": "node-1781836691780",
+        "startTime": "2026-06-12T08:00:11Z",
+        "endTime": "2026-06-12T08:00:49Z",
+        "totalRecords": 0,
+        "dpuHours": 0.013,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 402, "rowsProcessed": 0, "nodeExecutionTime": "0m 01s" },
+          "node-1781836731170": { "rowsIngested": 0,   "rowsProcessed": 0, "nodeExecutionTime": null },
+          "node-1781836755171": { "rowsIngested": 0,   "rowsProcessed": 0, "nodeExecutionTime": null }
+        }
+      },
+      {
+        "runId": "GJ-RUN-C3Y",
+        "status": "Succeeded",
+        "startTime": "2026-06-12T04:00:08Z",
+        "endTime": "2026-06-12T04:03:12Z",
+        "totalRecords": 8551,
+        "dpuHours": 0.107,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 8551, "rowsProcessed": 8551, "nodeExecutionTime": "0m 10s" },
+          "node-1781836731170": { "rowsIngested": 8551, "rowsProcessed": 8548, "nodeExecutionTime": "0m 04s" },
+          "node-1781836755171": { "rowsIngested": 8548, "rowsProcessed": 8548, "nodeExecutionTime": "0m 07s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-R6K",
+        "status": "Succeeded",
+        "startTime": "2026-06-12T00:00:05Z",
+        "endTime": "2026-06-12T00:02:33Z",
+        "totalRecords": 7703,
+        "dpuHours": 0.085,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 7703, "rowsProcessed": 7703, "nodeExecutionTime": "0m 08s" },
+          "node-1781836731170": { "rowsIngested": 7703, "rowsProcessed": 7700, "nodeExecutionTime": "0m 04s" },
+          "node-1781836755171": { "rowsIngested": 7700, "rowsProcessed": 7700, "nodeExecutionTime": "0m 07s" }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job-marketing-attribution",
+    "name": "Marketing Attribution Model",
+    "description": "Processes clickstream events and order data to compute multi-touch attribution scores across all active marketing channels.",
+    "lastModified": "2026-06-08T11:00:00Z",
+    "canvasRef": "etl-job.json",
+    "runs": [
+      {
+        "runId": "GJ-RUN-W5M",
+        "status": "Succeeded",
+        "startTime": "2026-06-08T03:00:17Z",
+        "endTime": "2026-06-08T03:11:44Z",
+        "totalRecords": 523801,
+        "dpuHours": 0.391,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 523801, "rowsProcessed": 523801, "nodeExecutionTime": "1m 14s" },
+          "node-1781836712031": { "rowsIngested": 8801,   "rowsProcessed": 8801,   "nodeExecutionTime": "0m 18s" },
+          "node-1781836704560": { "rowsIngestedLeft": 523801, "rowsIngestedRight": 8801, "rowsProcessed": 511204, "nodeExecutionTime": "2m 22s" },
+          "node-1781836731170": { "rowsIngested": 511204, "rowsProcessed": 511204, "nodeExecutionTime": "0m 48s" },
+          "node-1781836755171": { "rowsIngested": 511204, "rowsProcessed": 511204, "nodeExecutionTime": "1m 22s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-N1X",
+        "status": "Succeeded",
+        "startTime": "2026-06-07T03:00:09Z",
+        "endTime": "2026-06-07T03:10:58Z",
+        "totalRecords": 498234,
+        "dpuHours": 0.366,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 498234, "rowsProcessed": 498234, "nodeExecutionTime": "1m 08s" },
+          "node-1781836712031": { "rowsIngested": 8801,   "rowsProcessed": 8801,   "nodeExecutionTime": "0m 17s" },
+          "node-1781836704560": { "rowsIngestedLeft": 498234, "rowsIngestedRight": 8801, "rowsProcessed": 485912, "nodeExecutionTime": "2m 16s" },
+          "node-1781836731170": { "rowsIngested": 485912, "rowsProcessed": 485912, "nodeExecutionTime": "0m 44s" },
+          "node-1781836755171": { "rowsIngested": 485912, "rowsProcessed": 485912, "nodeExecutionTime": "1m 17s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-D4Q",
+        "status": "Succeeded",
+        "startTime": "2026-06-06T03:00:22Z",
+        "endTime": "2026-06-06T03:13:07Z",
+        "totalRecords": 611429,
+        "dpuHours": 0.438,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 611429, "rowsProcessed": 611429, "nodeExecutionTime": "1m 28s" },
+          "node-1781836712031": { "rowsIngested": 8801,   "rowsProcessed": 8801,   "nodeExecutionTime": "0m 18s" },
+          "node-1781836704560": { "rowsIngestedLeft": 611429, "rowsIngestedRight": 8801, "rowsProcessed": 598701, "nodeExecutionTime": "2m 41s" },
+          "node-1781836731170": { "rowsIngested": 598701, "rowsProcessed": 598701, "nodeExecutionTime": "0m 56s" },
+          "node-1781836755171": { "rowsIngested": 598701, "rowsProcessed": 598701, "nodeExecutionTime": "1m 31s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-A8H",
+        "status": "Failed",
+        "errorNodeId": "node-1781836704560",
+        "startTime": "2026-06-05T03:00:14Z",
+        "endTime": "2026-06-05T03:02:31Z",
+        "totalRecords": 0,
+        "dpuHours": 0.076,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 611201, "rowsProcessed": 611201, "nodeExecutionTime": "1m 26s" },
+          "node-1781836712031": { "rowsIngested": 8801,   "rowsProcessed": 8801,   "nodeExecutionTime": "0m 17s" },
+          "node-1781836704560": { "rowsIngestedLeft": 611201, "rowsIngestedRight": 8801, "rowsProcessed": 0, "nodeExecutionTime": "0m 13s" },
+          "node-1781836731170": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null },
+          "node-1781836755171": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null }
+        }
+      },
+      {
+        "runId": "GJ-RUN-E2V",
+        "status": "Succeeded",
+        "startTime": "2026-06-04T03:00:06Z",
+        "endTime": "2026-06-04T03:09:52Z",
+        "totalRecords": 487116,
+        "dpuHours": 0.328,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 487116, "rowsProcessed": 487116, "nodeExecutionTime": "1m 05s" },
+          "node-1781836712031": { "rowsIngested": 8801,   "rowsProcessed": 8801,   "nodeExecutionTime": "0m 16s" },
+          "node-1781836704560": { "rowsIngestedLeft": 487116, "rowsIngestedRight": 8801, "rowsProcessed": 474901, "nodeExecutionTime": "2m 12s" },
+          "node-1781836731170": { "rowsIngested": 474901, "rowsProcessed": 474901, "nodeExecutionTime": "0m 43s" },
+          "node-1781836755171": { "rowsIngested": 474901, "rowsProcessed": 474901, "nodeExecutionTime": "1m 15s" }
+        }
+      }
+    ]
+  },
+  {
+    "id": "job-financial-reconciliation",
+    "name": "Financial Reconciliation",
+    "description": "Reconciles payment gateway transactions against internal order records and flags discrepancies for the finance team.",
+    "lastModified": "2026-05-30T08:30:00Z",
+    "canvasRef": "etl-job.json",
+    "runs": [
+      {
+        "runId": "GJ-RUN-G7F",
+        "status": "Succeeded",
+        "startTime": "2026-05-30T08:00:19Z",
+        "endTime": "2026-05-30T08:09:04Z",
+        "totalRecords": 74392,
+        "dpuHours": 0.301,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 74392, "rowsProcessed": 74392, "nodeExecutionTime": "0m 41s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 16s" },
+          "node-1781836704560": { "rowsIngestedLeft": 74392, "rowsIngestedRight": 8801, "rowsProcessed": 72918, "nodeExecutionTime": "1m 04s" },
+          "node-1781836731170": { "rowsIngested": 72918, "rowsProcessed": 72918, "nodeExecutionTime": "0m 22s" },
+          "node-1781836755171": { "rowsIngested": 72918, "rowsProcessed": 72918, "nodeExecutionTime": "0m 34s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-K2L",
+        "status": "Failed",
+        "errorNodeId": "node-1781836704560",
+        "startTime": "2026-05-23T08:00:11Z",
+        "endTime": "2026-05-23T08:03:47Z",
+        "totalRecords": 0,
+        "dpuHours": 0.124,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 68201, "rowsProcessed": 68201, "nodeExecutionTime": "0m 37s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 14s" },
+          "node-1781836704560": { "rowsIngestedLeft": 68201, "rowsIngestedRight": 8801, "rowsProcessed": 0, "nodeExecutionTime": "0m 09s" },
+          "node-1781836731170": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null },
+          "node-1781836755171": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null }
+        }
+      },
+      {
+        "runId": "GJ-RUN-U9P",
+        "status": "Succeeded",
+        "startTime": "2026-05-16T08:00:08Z",
+        "endTime": "2026-05-16T08:08:31Z",
+        "totalRecords": 68904,
+        "dpuHours": 0.284,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 68904, "rowsProcessed": 68904, "nodeExecutionTime": "0m 38s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 14s" },
+          "node-1781836704560": { "rowsIngestedLeft": 68904, "rowsIngestedRight": 8801, "rowsProcessed": 67401, "nodeExecutionTime": "0m 59s" },
+          "node-1781836731170": { "rowsIngested": 67401, "rowsProcessed": 67401, "nodeExecutionTime": "0m 20s" },
+          "node-1781836755171": { "rowsIngested": 67401, "rowsProcessed": 67401, "nodeExecutionTime": "0m 31s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-S3J",
+        "status": "Succeeded",
+        "startTime": "2026-05-09T08:00:22Z",
+        "endTime": "2026-05-09T08:07:58Z",
+        "totalRecords": 71245,
+        "dpuHours": 0.266,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 71245, "rowsProcessed": 71245, "nodeExecutionTime": "0m 39s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 15s" },
+          "node-1781836704560": { "rowsIngestedLeft": 71245, "rowsIngestedRight": 8801, "rowsProcessed": 69812, "nodeExecutionTime": "1m 01s" },
+          "node-1781836731170": { "rowsIngested": 69812, "rowsProcessed": 69812, "nodeExecutionTime": "0m 21s" },
+          "node-1781836755171": { "rowsIngested": 69812, "rowsProcessed": 69812, "nodeExecutionTime": "0m 32s" }
+        }
+      },
+      {
+        "runId": "GJ-RUN-Y6O",
+        "status": "Succeeded",
+        "startTime": "2026-05-02T08:00:14Z",
+        "endTime": "2026-05-02T08:10:22Z",
+        "totalRecords": 79831,
+        "dpuHours": 0.345,
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 79831, "rowsProcessed": 79831, "nodeExecutionTime": "0m 44s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 16s" },
+          "node-1781836704560": { "rowsIngestedLeft": 79831, "rowsIngestedRight": 8801, "rowsProcessed": 78204, "nodeExecutionTime": "1m 08s" },
+          "node-1781836731170": { "rowsIngested": 78204, "rowsProcessed": 78204, "nodeExecutionTime": "0m 23s" },
+          "node-1781836755171": { "rowsIngested": 78204, "rowsProcessed": 78204, "nodeExecutionTime": "0m 36s" }
+        }
+      }
+    ]
+  }
+]

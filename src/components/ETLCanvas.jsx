@@ -17,7 +17,7 @@ import zoomInUrl    from '../public/images/zoom-in.svg';
 import zoomOutUrl   from '../public/images/zoom-out.svg';
 import zoomToFitUrl from '../public/images/zoom-to-fit.svg';
 import ETLEdge from './ETLEdge.jsx';
-import { CONNECTION_RULES, deriveCategory } from '../utils/connectionRules.js';
+import { CONNECTION_RULES, deriveCategory, getMaxIncoming, wouldCreateCycle } from '../utils/connectionRules.js';
 
 const defaultEdgeOptions = { type: 'etlEdge' };
 const edgeTypes          = { etlEdge: ETLEdge };
@@ -87,9 +87,10 @@ const ETLCanvas = forwardRef(function ETLCanvas(
   const edgesRef = useRef(edges);
   edgesRef.current = edges;
 
-  const isReconnectingRef = useRef(false);
+  const isReconnectingRef    = useRef(false);
   const [isReconnecting, setIsReconnecting] = useState(false);
-  const reconnectedRef = useRef(false);
+  const reconnectedRef       = useRef(false);
+  const reconnectingEdgeRef  = useRef(null);
 
   const rfInstance    = useRef(null);
   const containerRef  = useRef(null);
@@ -157,6 +158,15 @@ const ETLCanvas = forwardRef(function ETLCanvas(
       ),
   }));
 
+  const handleNodesChange = useCallback((changes) => {
+    if (readOnly) {
+      const selectionOnly = changes.filter(c => c.type === 'select');
+      if (selectionOnly.length > 0) onNodesChange(selectionOnly);
+      return;
+    }
+    onNodesChange(changes);
+  }, [readOnly, onNodesChange]);
+
   const handleNodeClick = useCallback((_, node) => {
     onNodeSelect?.(node);
   }, [onNodeSelect]);
@@ -169,14 +179,16 @@ const ETLCanvas = forwardRef(function ETLCanvas(
     onEdgesChange(changes);
   }, [onEdgesChange]);
 
-  const handleReconnectStart = useCallback(() => {
+  const handleReconnectStart = useCallback((_, edge) => {
     isReconnectingRef.current = true;
-    reconnectedRef.current = false;
+    reconnectedRef.current    = false;
+    reconnectingEdgeRef.current = edge;
     setIsReconnecting(true);
   }, []);
 
   const handleReconnectEnd = useCallback((_, edge) => {
-    isReconnectingRef.current = false;
+    isReconnectingRef.current   = false;
+    reconnectingEdgeRef.current = null;
     setIsReconnecting(false);
     if (!reconnectedRef.current) {
       setEdges(eds => eds.filter(e => e.id !== edge.id));
@@ -193,9 +205,22 @@ const ETLCanvas = forwardRef(function ETLCanvas(
     const sourceNode = nodesRef.current.find(n => n.id === connection.source);
     const targetNode = nodesRef.current.find(n => n.id === connection.target);
     if (!sourceNode || !targetNode) return false;
+
     const sourceCategory = deriveCategory(sourceNode.data.type);
     const targetCategory = deriveCategory(targetNode.data.type);
-    return CONNECTION_RULES[sourceCategory]?.includes(targetCategory) ?? false;
+    if (!(CONNECTION_RULES[sourceCategory]?.includes(targetCategory) ?? false)) return false;
+
+    const max     = getMaxIncoming(targetNode.data.type);
+    const current = edgesRef.current.filter(e => e.target === connection.target).length;
+    // When reconnecting, the edge being moved still exists in state — don't count it
+    // against the target's limit if we're dropping onto the same target node.
+    const movingEdge      = reconnectingEdgeRef.current;
+    const adjustedCurrent = movingEdge?.target === connection.target ? current - 1 : current;
+
+    if (adjustedCurrent >= max) return false;
+    if (wouldCreateCycle(connection.source, connection.target, edgesRef.current)) return false;
+
+    return true;
   }, []);
 
   // One-time layout pass: center each node's x on the average center of its parents.
@@ -247,13 +272,15 @@ const ETLCanvas = forwardRef(function ETLCanvas(
         edges={augmentedEdges}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
-        onNodesChange={readOnly ? undefined : onNodesChange}
+        onNodesChange={handleNodesChange}
         onEdgesChange={readOnly ? undefined : handleEdgesChange}
+        nodesConnectable={!readOnly}
         onNodeClick={handleNodeClick}
         onPaneClick={onPaneClick}
         defaultEdgeOptions={defaultEdgeOptions}
         nodesDraggable={!readOnly}
         edgesReconnectable={!readOnly}
+        preventScrolling={!readOnly}
         onConnect={handleConnect}
         onReconnect={readOnly ? undefined : handleReconnect}
         onReconnectStart={readOnly ? undefined : handleReconnectStart}

@@ -7,7 +7,8 @@ import Select from '@cloudscape-design/components/select';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Table from '@cloudscape-design/components/table';
 import { useNodeForm } from './useNodeForm.js';
-import finalCsv from '../data/transactions_final.csv?raw';
+import { wouldCreateCycle } from '../utils/connectionRules.js';
+import finalCsv from '../data/transactions_mapped.csv?raw';
 
 const DATA_TYPE_OPTIONS = [
   'string', 'double', 'long', 'short', 'int', 'float',
@@ -29,7 +30,7 @@ function getFinalCsvData() {
   const inferType = v => {
     if (!v) return 'string';
     if (v === 'true' || v === 'false') return 'boolean';
-    if (!isNaN(v)) return Number.isInteger(+v) ? 'int' : 'double';
+    if (!isNaN(Number(v))) return Number.isInteger(Number(v)) ? 'int' : 'double';
     return 'string';
   };
   _finalCsvCache = {
@@ -48,19 +49,29 @@ function getMockExtraData(mappings) {
   return complete ? getFinalCsvData() : { outputSchema: [], previewData: [] };
 }
 
-export default function ApplyMappingTransformForm({ node, onUpdate, allNodes = [], allEdges = [], onRemoveEdge }) {
+export default function ApplyMappingTransformForm({ node, onUpdate, allNodes = [], allEdges = [], onAddEdge, onRemoveEdge }) {
   // Read dataInputNodeId from node.data.config directly to avoid a circular dep
   // (upstreamSchema is needed by useNodeForm, but it depends on dataInputNodeId from config)
-  const incomingEdges   = allEdges.filter(e => e.target === node.id);
-  const incomingNodes   = incomingEdges.map(e => allNodes.find(n => n.id === e.source)).filter(Boolean);
-  const configuredId    = node.data.config?.dataInputNodeId;
-  const selectedInputId = configuredId && incomingNodes.some(n => n.id === configuredId)
+  const incomingEdges    = allEdges.filter(e => e.target === node.id);
+  const connectedNodeIds = new Set(incomingEdges.map(e => e.source));
+  const configuredId     = node.data.config?.dataInputNodeId;
+  const selectedInputId  = configuredId && connectedNodeIds.has(configuredId)
     ? configuredId
-    : (incomingNodes[0]?.id ?? null);
+    : (connectedNodeIds.size === 1 ? [...connectedNodeIds][0] : null);
   const upstreamNode    = selectedInputId ? allNodes.find(n => n.id === selectedInputId) : null;
-  const upstreamSchema  = upstreamNode?.data?.outputSchema ?? [];
+  const upstreamSchema  = upstreamNode?.data?.status === 'success'
+    ? (upstreamNode?.data?.outputSchema ?? [])
+    : [];
 
-  const inputOptions = incomingNodes.map(n => ({ value: n.id, label: n.data.label ?? n.id, description: n.data.type }));
+  const inputOptions = allNodes
+    .filter(n => n.id !== node.id)
+    .filter(n => ['Source', 'Transform'].includes(n.data.type?.split(' - ')[0]))
+    .map(n => ({
+      value:       n.id,
+      label:       n.data.label ?? n.id,
+      description: n.data.type,
+      disabled:    connectedNodeIds.has(n.id) || wouldCreateCycle(n.id, node.id, allEdges),
+    }));
 
   const { config, errors, handleChange, handleConfigChange } = useNodeForm(node, onUpdate, [upstreamSchema]);
 
@@ -91,10 +102,22 @@ export default function ApplyMappingTransformForm({ node, onUpdate, allNodes = [
   const prevSchemaKeyRef = useRef('');
   useEffect(() => {
     const schemaKey = upstreamSchema.map(c => `${c.name}:${c.dataType}`).join('|');
+
+    if (upstreamSchema.length === 0) {
+      prevSchemaKeyRef.current = '';
+      if ((configRef.current.mappings ?? []).length > 0) {
+        onUpdate(node.id, {
+          config:       { ...configRef.current, mappings: [] },
+          status:       'pending',
+          outputSchema: [],
+          previewData:  [],
+        });
+      }
+      return;
+    }
+
     if (schemaKey === prevSchemaKeyRef.current) return;
     prevSchemaKeyRef.current = schemaKey;
-
-    if (upstreamSchema.length === 0) return;
 
     const currentConfig = configRef.current;
     const existing      = currentConfig.mappings ?? [];
@@ -113,6 +136,9 @@ export default function ApplyMappingTransformForm({ node, onUpdate, allNodes = [
   // ── Handlers ──────────────────────────────────────────────────────────────
 
   const handleDataInputChange = (nodeId) => {
+    const existingEdge = allEdges.find(e => e.target === node.id);
+    if (existingEdge) onRemoveEdge?.(existingEdge.id);
+    onAddEdge?.({ id: `e-${nodeId}-${node.id}`, source: nodeId, target: node.id, type: 'etlEdge' });
     prevSchemaKeyRef.current = '';
     onUpdate(node.id, { config: { ...configRef.current, dataInputNodeId: nodeId, mappings: [] }, status: 'pending' });
   };
@@ -155,7 +181,7 @@ export default function ApplyMappingTransformForm({ node, onUpdate, allNodes = [
 
   return (
     <SpaceBetween direction="vertical" size="m">
-      <FormField label="Data input">
+      <FormField label="Data input" description="Choose the node that provides the data to transform.">
         <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
           <div style={{ flex: 1 }}>
             <Select
@@ -171,6 +197,7 @@ export default function ApplyMappingTransformForm({ node, onUpdate, allNodes = [
           <Button disabled={!selectedInputId} onClick={handleRemoveDataInput}>Remove</Button>
         </div>
       </FormField>
+      <div style={{ borderTop: '1px solid #d1d5db', padding: '0' }} />
       <FormField label="Mappings" description="Map source fields to output fields. Rename columns, change data types, or exclude fields from the output.">
         <Table
           variant="embedded"

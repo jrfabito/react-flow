@@ -123,25 +123,41 @@ export default function NodePropertiesPanel({ node, onUpdate, onClose, upstreamS
     </div>
   );
 
-  const dataOutputItems      = node?.data?.previewData ?? [];
+  const isTarget = node?.data?.type?.includes('Target') ?? false;
+  const upstreamNode = useMemo(() => {
+    if (!isTarget || !node) return null;
+    const incomingEdge = allEdges.find(e => e.target === node.id);
+    return incomingEdge ? allNodes.find(n => n.id === incomingEdge.source) ?? null : null;
+  }, [isTarget, node?.id, allEdges, allNodes]);
+
+  const effectiveOutputSchema = useMemo(() =>
+    (node?.data?.outputSchema?.length ? node.data.outputSchema : upstreamNode?.data?.outputSchema) ?? [],
+    [node?.data?.outputSchema, upstreamNode?.data?.outputSchema],
+  );
+  const effectivePreviewData = useMemo(() =>
+    (node?.data?.previewData?.length ? node.data.previewData : upstreamNode?.data?.previewData) ?? [],
+    [node?.data?.previewData, upstreamNode?.data?.previewData],
+  );
+
+  const dataOutputItems      = effectivePreviewData;
   const filteringProperties  = useMemo(() =>
-    (node?.data?.outputSchema ?? []).map(col => ({
+    effectiveOutputSchema.map(col => ({
       key:              col.name,
       label:            col.name,
       propertyLabel:    col.name,
       operators:        [':', '!:', '=', '!='],
       groupValuesLabel: `${col.name} values`,
     })),
-    [node?.data?.outputSchema],
+    [effectiveOutputSchema],
   );
   const filteringOptions = useMemo(() => {
-    const schema = node?.data?.outputSchema ?? [];
-    const rows   = node?.data?.previewData  ?? [];
+    const schema = effectiveOutputSchema;
+    const rows   = effectivePreviewData;
     return schema.flatMap(col => {
       const unique = [...new Set(rows.map(row => String(row[col.name] ?? '')))];
       return unique.map(value => ({ propertyKey: col.name, value }));
     });
-  }, [node?.data?.outputSchema, node?.data?.previewData]);
+  }, [effectiveOutputSchema, effectivePreviewData]);
 
   const filteredDataOutputItems = useMemo(() => {
     const { tokens, operation } = propertyFilterQuery;
@@ -177,7 +193,7 @@ export default function NodePropertiesPanel({ node, onUpdate, onClose, upstreamS
 
   const { id, data } = node;
 
-  const outputColumns = (data.outputSchema ?? []).map((col, idx) => ({
+  const outputColumns = effectiveOutputSchema.map((col, idx) => ({
     id:     col.name,
     header: idx === 0 ? <span style={{ paddingLeft: '12px' }}>{col.name}</span> : col.name,
     cell:   item => idx === 0
@@ -205,10 +221,15 @@ export default function NodePropertiesPanel({ node, onUpdate, onClose, upstreamS
   const handleTypeChange = ({ detail }) => {
     const item = registryItems.find(r => r.id === detail.selectedOption.value);
     if (!item) return;
+    const newCategory   = item.type.split(' - ')[0];
+    const sameTypeCount = allNodes.filter(n => n.data.iconType === item.iconType).length;
+    const newLabel      = `${item.label} ${newCategory.toLowerCase()} ${sameTypeCount + 1}`;
     allEdges.filter(e => e.target === id).forEach(e => onRemoveEdge?.(e.id));
+    setNameError(null);
     onUpdate(id, {
       type:             item.type,
       iconType:         item.iconType,
+      label:            newLabel,
       config:           {},
       status:           'pending',
       validationErrors: {},
@@ -269,10 +290,12 @@ export default function NodePropertiesPanel({ node, onUpdate, onClose, upstreamS
                   <FormField label="Name" errorText={nameError}>
                     <Input value={data.label ?? ''} onChange={handleLabelChange} />
                   </FormField>
-                  <div style={{ padding: '4px 0', borderBottom: '1px solid #d1d5db', margin: '0 -24px' }} />
+
+                  {/* <div style={{ padding: '4px 0', borderBottom: '1px solid #d1d5db', margin: '0 -16px' }} /> */}
                   <NodeForm node={node} onUpdate={onUpdate} upstreamSchema={upstreamSchema} allNodes={allNodes} allEdges={allEdges} onAddEdge={onAddEdge} onRemoveEdge={onRemoveEdge} />
                 </SpaceBetween>
               </Box>
+              
             ),
           },
           {
@@ -292,7 +315,7 @@ export default function NodePropertiesPanel({ node, onUpdate, onClose, upstreamS
                     },
                     { id: 'dataType', header: 'Data type', cell: item => item.dataType },
                   ]}
-                  items={node.data.outputSchema ?? []}
+                  items={effectiveOutputSchema}
                   empty={
                     <Box textAlign="center" color="inherit" padding="l">
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>

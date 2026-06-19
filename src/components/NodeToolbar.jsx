@@ -14,6 +14,7 @@ export default function NodeToolbar({
   onRedo, canRedo,
   onRemove, canRemove,
   onLoadJson,
+  onExportJson,
   showGuideAlert = false,
 }) {
   const [selected, setSelected] = useState({ Source: null, Transform: null, Target: null });
@@ -72,13 +73,14 @@ export default function NodeToolbar({
             <Button iconName="remove" variant="normal" disabled={!canRemove} onClick={onRemove}></Button>
           </SpaceBetween>
         </div>
-        {/* <Button iconName="upload" variant="normal" onClick={() => fileInputRef.current?.click()}>Load JSON</Button> */}
-        {/* <input ref={fileInputRef} type="file" accept=".json" style={{ display: 'none' }} onChange={handleFileChange} /> */}
+        {/* <Button iconName="upload"   variant="normal" onClick={() => fileInputRef.current?.click()}>Load JSON</Button>
+        <Button iconName="download" variant="normal" onClick={onExportJson}>Export JSON</Button>
+        <input ref={fileInputRef} type="file" accept=".json" style={{ display: 'none' }} onChange={handleFileChange} /> */}
       </SpaceBetween>
       {showGuideAlert && (
         <div style={{ marginTop: '20px' }}>
           <Alert type="info">
-            To start creating a job, add a source to the canvas.
+            To start creating a job, <strong>add a source</strong> to the canvas.
           </Alert>
         </div>
       )}

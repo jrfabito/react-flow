@@ -1,0 +1,14 @@
+transaction_id,store_id,product_id,product_name,category,department,quantity,unit_price,total_amount,sale_date,sale_time,payment_method
+TXN-1001,STR-01,PRD-201,Yoga Mat,Fitness Equipment,Sports,2,29.99,59.98,2024-03-15,08:14:22,CREDIT
+TXN-1002,STR-01,PRD-305,Wireless Headphones,Audio,Electronics,1,149.99,149.99,2024-03-15,08:31:07,DEBIT
+TXN-1003,STR-02,PRD-201,Yoga Mat,Fitness Equipment,Sports,3,29.99,89.97,2024-03-15,09:02:45,CASH
+TXN-1004,STR-03,PRD-410,Cast Iron Skillet,Cookware,Kitchen,1,89.99,89.99,2024-03-15,09:18:33,CREDIT
+TXN-1006,STR-02,PRD-512,Dish Towel Set,Kitchen Linens,Kitchen,2,19.99,39.98,2024-03-15,10:05:58,CREDIT
+TXN-1008,STR-03,PRD-610,Energy Bar 12pk,Nutrition,Grocery,4,9.99,39.96,2024-03-15,11:02:39,CASH
+TXN-1009,STR-02,PRD-410,Cast Iron Skillet,Cookware,Kitchen,2,89.99,179.98,2024-03-15,11:28:04,CREDIT
+TXN-1010,STR-01,PRD-512,Dish Towel Set,Kitchen Linens,Kitchen,1,19.99,19.99,2024-03-15,12:01:55,DEBIT
+TXN-1011,STR-03,PRD-201,Yoga Mat,Fitness Equipment,Sports,2,29.99,59.98,2024-03-15,12:44:30,CASH
+TXN-1012,STR-02,PRD-610,Energy Bar 12pk,Nutrition,Grocery,6,9.99,59.94,2024-03-15,13:15:22,CREDIT
+TXN-1013,STR-01,PRD-410,Cast Iron Skillet,Cookware,Kitchen,1,89.99,89.99,2024-03-15,14:02:18,CREDIT
+TXN-1014,STR-03,PRD-305,Wireless Headphones,Audio,Electronics,2,149.99,299.98,2024-03-15,14:38:47,DEBIT
+TXN-1015,STR-02,PRD-201,Yoga Mat,Fitness Equipment,Sports,1,29.99,29.99,2024-03-15,15:11:09,CASH

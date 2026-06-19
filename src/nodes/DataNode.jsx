@@ -1,22 +1,35 @@
 import { useState } from 'react';
-import { Handle, Position, useConnection } from '@xyflow/react';
+import { Handle, Position, useConnection, useEdges } from '@xyflow/react';
 import StatusIndicator from '@cloudscape-design/components/status-indicator';
 import { serviceIconRegistry } from './serviceIconRegistry.js';
-import { deriveCategory } from '../utils/connectionRules.js';
+import { deriveCategory, getMaxIncoming } from '../utils/connectionRules.js';
 
-const handleBase = { background: '#1565c0', width: 9, height: 9, border: '2px solid white' };
+const handleBase = { width: 9, height: 9, border: '2px solid white' };
 
-export function DataNode({ data, selected }) {
+export function DataNode({ id, data, selected }) {
   const [hovered, setHovered] = useState(false);
   const { inProgress: connecting } = useConnection();
+  const edges    = useEdges();
   const iconUrl  = serviceIconRegistry[data.iconType];
   const category = deriveCategory(data.type);
 
   const showHandles = hovered || selected || connecting;
 
-  const handleStyle = {
+  const incomingCount = edges.filter(e => e.target === id).length;
+  const isFull        = incomingCount >= getMaxIncoming(data.type);
+
+  const targetHandleStyle = {
     ...handleBase,
-    opacity: showHandles ? 1 : 0,
+    background:  isFull ? '#9ca3af' : '#1565c0',
+    opacity:     showHandles ? 1 : 0,
+    pointerEvents: showHandles ? 'all' : 'none',
+    transition:  'opacity 0.15s ease',
+  };
+
+  const sourceHandleStyle = {
+    ...handleBase,
+    background: '#1565c0',
+    opacity:    showHandles ? 1 : 0,
     pointerEvents: showHandles ? 'all' : 'none',
     transition: 'opacity 0.15s ease',
   };
@@ -43,7 +56,14 @@ export function DataNode({ data, selected }) {
         boxSizing: 'border-box',
       }}
     >
-      {category !== 'Source' && <Handle type="target" position={Position.Top} style={handleStyle} />}
+      {category !== 'Source' && (
+        <Handle
+          type="target"
+          position={Position.Top}
+          style={targetHandleStyle}
+          isConnectable={!isFull}
+        />
+      )}
 
       <div style={{
         width: '48px',
@@ -70,7 +90,7 @@ export function DataNode({ data, selected }) {
 
       <StatusIndicator type={data.status} />
 
-      {category !== 'Target' && <Handle type="source" position={Position.Bottom} style={handleStyle} />}
+      {category !== 'Target' && <Handle type="source" position={Position.Bottom} style={sourceHandleStyle} />}
     </div>
   );
 }

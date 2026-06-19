@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ExpandableSection from '@cloudscape-design/components/expandable-section';
 import FormField from '@cloudscape-design/components/form-field';
 import Input from '@cloudscape-design/components/input';
@@ -77,16 +76,15 @@ export default function RDSSourceForm({ node, onUpdate, upstreamSchema }) {
 
   const dataSourceMode     = config.dataSourceMode ?? 'table';
   const selectedConnection = CONNECTION_OPTIONS.find(o => o.value === config.connection) ?? null;
-  const [selectedTable, setSelectedTable] = useState(null);
+  const tableOptions       = tableOptionsByConnection[selectedConnection?.value] ?? [];
+  const selectedTable      = tableOptions.find(o => o.value === config.tableName) ?? null;
 
   const handleConnectionChange = ({ detail }) => {
-    setSelectedTable(null);
     const newConfig = { ...config, connection: detail.selectedOption.value, tableName: '' };
     handleChange('connection', detail.selectedOption.value, getMockExtraData(newConfig));
   };
 
   const handleTableSelect = ({ detail }) => {
-    setSelectedTable(detail.selectedOption);
     const newConfig = { ...config, tableName: detail.selectedOption.value };
     handleChange('tableName', detail.selectedOption.value, getMockExtraData(newConfig));
   };
@@ -105,6 +103,7 @@ export default function RDSSourceForm({ node, onUpdate, upstreamSchema }) {
 
   return (
     <SpaceBetween direction="vertical" size="m">
+      <div style={{ borderTop: '1px solid #d1d5db', padding: '0' }} />
       <FormField
         label="Connection"
         description="Choose a Glue connection configured for your RDS instance."
@@ -121,7 +120,7 @@ export default function RDSSourceForm({ node, onUpdate, upstreamSchema }) {
         </SpaceBetween>
       </FormField>
 
-      <FormField label="Data source">
+      <FormField label="Data source" description="Choose the type of data source to use.">
         <RadioGroup
           value={dataSourceMode}
           onChange={handleModeChange}
@@ -137,7 +136,7 @@ export default function RDSSourceForm({ node, onUpdate, upstreamSchema }) {
           <Select
             selectedOption={selectedTable}
             onChange={handleTableSelect}
-            options={tableOptionsByConnection[selectedConnection?.value] ?? []}
+            options={tableOptions}
             placeholder="Select a table"
             empty="Select a connection first"
             disabled={!selectedConnection}
@@ -146,7 +145,7 @@ export default function RDSSourceForm({ node, onUpdate, upstreamSchema }) {
       )}
 
       {dataSourceMode === 'query' && (
-        <FormField label="SQL query" errorText={errors.sqlQuery}>
+        <FormField label="SQL query" description="Enter a custom SQL query to fetch data." errorText={errors.sqlQuery}>
           <Textarea
             value={config.sqlQuery ?? ''}
             onChange={handleQueryChange}
