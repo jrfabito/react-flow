@@ -80,7 +80,8 @@ const CHART_I18N = {
   },
 };
 
-const CHART_X_DOMAIN = [METRIC_T[0], METRIC_T[5]];
+const CHART_X_DOMAIN         = [METRIC_T[0], METRIC_T[5]];
+const CHART_X_DOMAIN_RUNNING = [METRIC_T[0], METRIC_T[2]];
 
 const MEMORY_SERIES = [
   {
@@ -206,6 +207,57 @@ const IO_SERIES_FAILED = [
   },
 ];
 
+// ── Running-run variants — partial data collected so far, trailing off mid-run ─
+
+const MEMORY_SERIES_RUNNING = [
+  {
+    title: 'JVM heap usage (%)',
+    type:  'line',
+    data:  [
+      { x: METRIC_T[0], y: 25 },
+      { x: METRIC_T[1], y: 35 },
+      { x: METRIC_T[2], y: 65 },
+    ],
+  },
+  { title: 'Warning threshold', type: 'threshold', y: 50 },
+];
+
+const DPU_SERIES_RUNNING = [
+  {
+    title: 'DPU-hours',
+    type:  'line',
+    data:  [
+      { x: METRIC_T[0], y: 0 },
+      { x: METRIC_T[1], y: 2 },
+      { x: METRIC_T[2], y: 4 },
+    ],
+  },
+];
+
+const SHUFFLE_SERIES_RUNNING = [
+  {
+    title: 'Shuffle read/write data (MB)',
+    type:  'line',
+    data:  [
+      { x: METRIC_T[0], y: 5   },
+      { x: METRIC_T[1], y: 20  },
+      { x: METRIC_T[2], y: 900 },
+    ],
+  },
+];
+
+const IO_SERIES_RUNNING = [
+  {
+    title: 'Data speed',
+    type:  'line',
+    data:  [
+      { x: METRIC_T[0], y: 5  },
+      { x: METRIC_T[1], y: 8  },
+      { x: METRIC_T[2], y: 13 },
+    ],
+  },
+];
+
 // ── Stopped-run variants — gradual trailing off reflecting a user-initiated stop
 
 const MEMORY_SERIES_STOPPED = [
@@ -278,26 +330,29 @@ export default function RunDetailsPage() {
   const [flashDismissed, setFlashDismissed]           = useState(false);
   const [errorFlashDismissed, setErrorFlashDismissed] = useState(false);
   const [stopFlashDismissed, setStopFlashDismissed]   = useState(false);
+  const [runningFlashDismissed, setRunningFlashDismissed] = useState(false);
+  const [stoppedOverride, setStoppedOverride]         = useState(false);
 
   const jobName      = run?.jobName      ?? '—';
   const jobId        = run?.jobId        ?? null;
   const returnPath   = run?.returnPath   ?? (jobId ? `/jobs/${jobId}` : '/');
   const canvas       = run?.canvas       ?? null;
   const nodeStats    = run?.nodeStats    ?? {};
-  const status       = run?.status       ?? '—';
+  const status       = stoppedOverride ? 'Stopped' : (run?.status ?? '—');
   const errorNodeId  = run?.errorNodeId  ?? null;
   const isFailed     = status === 'Failed';
   const isStopped    = status === 'Stopped';
+  const isRunning    = status === 'Running';
 
-  const memorySeries  = isFailed ? MEMORY_SERIES_FAILED  : isStopped ? MEMORY_SERIES_STOPPED  : MEMORY_SERIES;
-  const dpuSeries     = isFailed ? DPU_SERIES_FAILED     : isStopped ? DPU_SERIES_STOPPED     : DPU_SERIES;
-  const shuffleSeries = isFailed ? SHUFFLE_SERIES_FAILED : isStopped ? SHUFFLE_SERIES_STOPPED : SHUFFLE_SERIES;
-  const ioSeries      = isFailed ? IO_SERIES_FAILED      : isStopped ? IO_SERIES_STOPPED      : IO_SERIES;
+  const memorySeries  = isFailed ? MEMORY_SERIES_FAILED  : isStopped ? MEMORY_SERIES_STOPPED  : isRunning ? MEMORY_SERIES_RUNNING  : MEMORY_SERIES;
+  const dpuSeries     = isFailed ? DPU_SERIES_FAILED     : isStopped ? DPU_SERIES_STOPPED     : isRunning ? DPU_SERIES_RUNNING     : DPU_SERIES;
+  const shuffleSeries = isFailed ? SHUFFLE_SERIES_FAILED : isStopped ? SHUFFLE_SERIES_STOPPED : isRunning ? SHUFFLE_SERIES_RUNNING : SHUFFLE_SERIES;
+  const ioSeries      = isFailed ? IO_SERIES_FAILED      : isStopped ? IO_SERIES_STOPPED      : isRunning ? IO_SERIES_RUNNING      : IO_SERIES;
 
-  const startTime    = run?.startTime    ?? null;
-  const endTime      = run?.endTime      ?? null;
-  const totalRecords = run?.totalRecords != null ? run.totalRecords.toLocaleString() : '—';
-  const dpuHours     = run?.dpuHours     != null ? String(run.dpuHours)              : '—';
+  const startTime    = run?.startTime ?? null;
+  const endTime      = stoppedOverride ? '2026-06-19T02:02:33Z'  : (run?.endTime      ?? null);
+  const totalRecords = stoppedOverride ? '18,432'                 : (run?.totalRecords != null ? run.totalRecords.toLocaleString() : '—');
+  const dpuHours     = stoppedOverride ? '0.08'                   : (run?.dpuHours     != null ? String(run.dpuHours)              : '—');
 
   const canvasNodes     = canvas?.nodes ?? [];
   const firstNodeId     = canvasNodes[0]?.id ?? null;
@@ -349,36 +404,61 @@ export default function RunDetailsPage() {
     };
   }
 
+  const getNodeRunStatus = (n) => {
+    const stats = nodeStats[n.id];
+    if (status === 'Succeeded') return 'success';
+    if (n.id === errorNodeId) return 'error';
+    if (isRunning || isStopped) {
+      if (!stats) return 'pending';
+      if (stats.nodeExecutionTime !== '—') return 'success';
+      const hasProgress = (stats.rowsIngested > 0) || (stats.rowsIngestedLeft > 0) || (stats.rowsIngestedRight > 0);
+      if (isStopped) return hasProgress ? 'stopped' : 'pending';
+      return hasProgress ? 'loading' : 'pending';
+    }
+    if (!stats || stats.nodeExecutionTime === null) return 'pending';
+    return 'success';
+  };
+
+  const selectedNodeStatus = selectedNodeId
+    ? getNodeRunStatus(canvasNodes.find(n => n.id === selectedNodeId) ?? { id: selectedNodeId })
+    : null;
+
+  const nodeStatusLabels = { success: 'Succeeded', error: 'Failed', loading: 'Running', pending: 'Pending', stopped: 'Stopped' };
+
+  const nodeStatusItem = selectedNodeStatus
+    ? {
+        label: 'Node status',
+        value: (
+          <StatusIndicator type={selectedNodeStatus}>
+            {nodeStatusLabels[selectedNodeStatus] ?? selectedNodeStatus}
+          </StatusIndicator>
+        ),
+      }
+    : null;
+
   const kvItems = isJoin
     ? [
         { label: 'Type',                  value: nodeType                                    },
+        ...(nodeStatusItem ? [nodeStatusItem] : []),
         { label: 'Rows ingested (left)',  value: fmt(selectedStats?.rowsIngestedLeft)        },
         { label: 'Rows ingested (right)', value: fmt(selectedStats?.rowsIngestedRight)       },
         { label: 'Rows processed',        value: fmt(selectedStats?.rowsProcessed)           },
-        { label: 'Node duration',   value: selectedStats?.nodeExecutionTime ?? '—'     },
+        { label: 'Node duration',         value: selectedStats?.nodeExecutionTime ?? '—'     },
       ]
     : [
-        { label: 'Type',                value: nodeType                                    },
-        { label: 'Rows ingested',       value: fmt(selectedStats?.rowsIngested)            },
-        { label: 'Rows processed',      value: fmt(selectedStats?.rowsProcessed)           },
-        { label: 'Node duration', value: selectedStats?.nodeExecutionTime ?? '—'     },
+        { label: 'Type',                  value: nodeType                                    },
+        ...(nodeStatusItem ? [nodeStatusItem] : []),
+        { label: 'Rows ingested',         value: fmt(selectedStats?.rowsIngested)            },
+        { label: 'Rows processed',        value: fmt(selectedStats?.rowsProcessed)           },
+        { label: 'Node duration',         value: selectedStats?.nodeExecutionTime ?? '—'     },
         ...(locationItem ? [locationItem] : []),
       ];
 
-  const initialNodes = canvasNodes.map(n => {
-    const stats = nodeStats[n.id];
-    let runStatus;
-    if (status === 'Succeeded') {
-      runStatus = 'success';
-    } else if (n.id === errorNodeId) {
-      runStatus = 'error';
-    } else if (!stats || stats.nodeExecutionTime === null) {
-      runStatus = 'pending';
-    } else {
-      runStatus = 'success';
-    }
-    return { ...n, selected: n.id === firstNodeId, data: { ...n.data, status: runStatus } };
-  });
+  const initialNodes = canvasNodes.map(n => ({
+    ...n,
+    selected: n.id === firstNodeId,
+    data: { ...n.data, status: getNodeRunStatus(n) },
+  }));
   const initialEdges = canvasEdges;
 
   return (
@@ -457,6 +537,18 @@ export default function RunDetailsPage() {
         onToolsChange={({ detail }) => setToolsOpen(detail.open)}
         content={
           <SpaceBetween direction="vertical" size="m">
+            {!runningFlashDismissed && isRunning && (
+              <Flashbar
+                items={[{
+                  type:        'in-progress',
+                  content:     `Job run ${runId} is currently in progress.`,
+                  dismissible: true,
+                  onDismiss:   () => setRunningFlashDismissed(true),
+                  id:          'run-running',
+                }]}
+              />
+            )}
+
             {!flashDismissed && run?.isLiveRun && status === 'Succeeded' && (
               <Flashbar
                 items={[{
@@ -501,10 +593,10 @@ export default function RunDetailsPage() {
               variant="h1"
               actions={
                 <SpaceBetween direction="horizontal" size="xs">
-                  <Button disabled>Stop run</Button>
+                  <Button disabled={!isRunning} onClick={() => setStoppedOverride(true)}>Stop run</Button>
                   <Button>Clone run</Button>
                   <Button onClick={() => navigate(returnPath, { state: { canvas, jobName } })}>View job</Button>
-                  <Button variant="primary" iconName="external" iconAlign="right">View output in S3</Button>
+                  <Button variant="primary" iconName="external" iconAlign="right" disabled={isRunning}>View output in S3</Button>
                 </SpaceBetween>
               }
             >
@@ -546,6 +638,7 @@ export default function RunDetailsPage() {
                 <div style={{ display: 'flex', height: '740px' }}>
                   <div style={{ width: '50%', height: '100%', borderRight: '1px solid #e9ebed' }}>
                     <ETLCanvas
+                      key={status}
                       readOnly
                       initialNodes={initialNodes}
                       initialEdges={initialEdges}
@@ -610,7 +703,7 @@ export default function RunDetailsPage() {
               >
                 <LineChart
                   series={memorySeries}
-                  xDomain={CHART_X_DOMAIN}
+                  xDomain={isRunning ? CHART_X_DOMAIN_RUNNING : CHART_X_DOMAIN}
                   yDomain={[0, 100]}
                   xScaleType="time"
                   yTitle="JVM heap usage (%)"
@@ -636,7 +729,7 @@ export default function RunDetailsPage() {
               >
                 <LineChart
                   series={dpuSeries}
-                  xDomain={CHART_X_DOMAIN}
+                  xDomain={isRunning ? CHART_X_DOMAIN_RUNNING : CHART_X_DOMAIN}
                   yDomain={[0, 10]}
                   xScaleType="time"
                   yTitle="DPU-hours"
@@ -662,7 +755,7 @@ export default function RunDetailsPage() {
               >
                 <LineChart
                   series={shuffleSeries}
-                  xDomain={CHART_X_DOMAIN}
+                  xDomain={isRunning ? CHART_X_DOMAIN_RUNNING : CHART_X_DOMAIN}
                   yDomain={[0, 1000]}
                   xScaleType="time"
                   yTitle="Shuffle read/write data (MB)"
@@ -688,7 +781,7 @@ export default function RunDetailsPage() {
               >
                 <LineChart
                   series={ioSeries}
-                  xDomain={CHART_X_DOMAIN}
+                  xDomain={isRunning ? CHART_X_DOMAIN_RUNNING : CHART_X_DOMAIN}
                   yDomain={[0, 20]}
                   xScaleType="time"
                   yTitle="Data speed"

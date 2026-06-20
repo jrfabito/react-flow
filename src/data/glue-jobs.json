@@ -7,6 +7,18 @@
     "canvasRef": "etl-job.json",
     "runs": [
       {
+        "runId": "GJ-RUN-Q7W",
+        "status": "Running",
+        "startTime": "2026-06-19T02:00:03Z",
+        "nodeStats": {
+          "node-1781836691780": { "rowsIngested": 18432, "rowsProcessed": 18432, "nodeExecutionTime": "0m 21s" },
+          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 15s" },
+          "node-1781836704560": { "rowsIngestedLeft": 18432, "rowsIngestedRight": 8801, "rowsProcessed": 0, "nodeExecutionTime": "—" },
+          "node-1781836731170": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": "—" },
+          "node-1781836755171": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": "—" }
+        }
+      },
+      {
         "runId": "GJ-RUN-K4P",
         "status": "Succeeded",
         "startTime": "2026-06-17T02:00:08Z",

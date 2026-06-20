@@ -66,6 +66,32 @@ function generateRunId() {
   return `GJ-RUN-${suffix}`;
 }
 
+function generateRunningNodeStats(nodes) {
+  const stats = {};
+  const completedCount = Math.max(1, Math.floor(nodes.length / 3));
+  nodes.forEach((node, i) => {
+    const isJoin = node.data?.type?.includes('Join') ?? false;
+    if (i < completedCount) {
+      const secs     = Math.floor(Math.random() * 25) + 8;
+      const execTime = `${Math.floor(secs / 60)}m ${String(secs % 60).padStart(2, '0')}s`;
+      const rows     = Math.floor(Math.random() * 20000) + 5000;
+      stats[node.id] = isJoin
+        ? { rowsIngestedLeft: rows, rowsIngestedRight: Math.floor(rows * 0.35), rowsProcessed: Math.floor(rows * 0.97), nodeExecutionTime: execTime }
+        : { rowsIngested: rows, rowsProcessed: Math.floor(rows * 0.99), nodeExecutionTime: execTime };
+    } else if (i === completedCount) {
+      const partialRows  = Math.floor(Math.random() * 10000) + 2000;
+      stats[node.id] = isJoin
+        ? { rowsIngestedLeft: partialRows, rowsIngestedRight: 0, rowsProcessed: 0, nodeExecutionTime: '—' }
+        : { rowsIngested: partialRows, rowsProcessed: 0, nodeExecutionTime: '—' };
+    } else {
+      stats[node.id] = isJoin
+        ? { rowsIngestedLeft: 0, rowsIngestedRight: 0, rowsProcessed: 0, nodeExecutionTime: '—' }
+        : { rowsIngested: 0, rowsProcessed: 0, nodeExecutionTime: '—' };
+    }
+  });
+  return stats;
+}
+
 function generateNodeStats(nodes, totalRecords) {
   const stats = {};
   nodes.forEach(node => {
@@ -150,12 +176,8 @@ export default function CreateJobPage() {
   const [hasNodes, setHasNodes] = useState(savedCanvas.nodes.length > 0);
 
   const handleRun = () => {
-    const runId        = generateRunId();
-    const startTime    = new Date();
-    const durationMs   = Math.floor(Math.random() * 5 * 60 * 1000) + 60 * 1000;
-    const endTime      = new Date(startTime.getTime() + durationMs);
-    const totalRecords = Math.floor(Math.random() * 50000) + 1000;
-    const canvas       = latestCanvasState.current;
+    const runId  = generateRunId();
+    const canvas = latestCanvasState.current;
     sessionStorage.setItem(CANVAS_STORAGE_KEY, JSON.stringify(canvas));
     navigate(`/runs/${runId}`, {
       state: {
@@ -163,14 +185,11 @@ export default function CreateJobPage() {
         jobName,
         runId,
         returnPath: jobId ? `/jobs/${jobId}` : '/create',
-        isLiveRun: true,
+        isLiveRun:  true,
         canvas,
-        status:       'Succeeded',
-        startTime:    startTime.toISOString(),
-        endTime:      endTime.toISOString(),
-        totalRecords,
-        dpuHours:     parseFloat((durationMs / 3600000 * 2).toFixed(3)),
-        nodeStats:    generateNodeStats(canvas.nodes, totalRecords),
+        status:     'Running',
+        startTime:  new Date().toISOString(),
+        nodeStats:  generateRunningNodeStats(canvas.nodes),
       },
     });
   };
