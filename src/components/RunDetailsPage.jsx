@@ -394,6 +394,7 @@ export default function RunDetailsPage() {
   }, [defaultNodeId]);
 
   const canvasEdges        = canvas?.edges ?? [];
+  const connectedEdgeIds   = canvasEdges.filter(e => e.source === selectedNodeId || e.target === selectedNodeId).map(e => e.id);
   const selectedCanvasNode = canvasNodes.find(n => n.id === selectedNodeId) ?? null;
   const selectedStats      = selectedNodeId ? (nodeStats[selectedNodeId] ?? null) : null;
   const isJoin             = selectedCanvasNode?.data?.type?.includes('Join') ?? false;
@@ -676,6 +677,7 @@ export default function RunDetailsPage() {
                       initialNodes={initialNodes}
                       initialEdges={initialEdges}
                       nodeTypes={nodeTypes}
+                      connectedEdgeIds={connectedEdgeIds}
                       onNodeSelect={node => setSelectedNodeId(node.id)}
                     />
                   </div>
