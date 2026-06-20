@@ -33,7 +33,7 @@ const NAV_ITEMS = [
 const STATUS_TYPE_MAP = {
   'Succeeded': 'success',
   'Failed':    'error',
-  'Running':   'in-progress',
+  'Running':   'loading',
   'Stopped':   'stopped',
   'Pending':   'pending',
 };
@@ -377,11 +377,21 @@ export default function RunDetailsPage() {
   const firstNodeId     = canvasNodes[0]?.id ?? null;
   const errorNodeLabel  = canvasNodes.find(n => n.id === errorNodeId)?.data?.label ?? null;
 
-  const [selectedNodeId, setSelectedNodeId] = useState(firstNodeId);
+  const runningNodeId = isRunning
+    ? (canvasNodes.find(n => {
+        const s = nodeStats[n.id];
+        if (!s || s.nodeExecutionTime !== '—') return false;
+        return (s.rowsIngested > 0) || (s.rowsIngestedLeft > 0) || (s.rowsIngestedRight > 0);
+      })?.id ?? firstNodeId)
+    : null;
+
+  const defaultNodeId = runningNodeId ?? firstNodeId;
+
+  const [selectedNodeId, setSelectedNodeId] = useState(defaultNodeId);
 
   useEffect(() => {
-    if (firstNodeId) setSelectedNodeId(firstNodeId);
-  }, [firstNodeId]);
+    if (defaultNodeId) setSelectedNodeId(defaultNodeId);
+  }, [defaultNodeId]);
 
   const canvasEdges        = canvas?.edges ?? [];
   const selectedCanvasNode = canvasNodes.find(n => n.id === selectedNodeId) ?? null;
@@ -479,7 +489,7 @@ export default function RunDetailsPage() {
 
   const initialNodes = canvasNodes.map(n => ({
     ...n,
-    selected: n.id === firstNodeId,
+    selected: n.id === defaultNodeId,
     data: { ...n.data, status: getNodeRunStatus(n) },
   }));
   const initialEdges = canvasEdges;
