@@ -150,7 +150,7 @@ export default function CreateJobPage() {
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
   const [jobName, setJobName] = useState(
-    locationState?.jobName ?? 'My job 01'
+    locationState?.jobName ?? jobData?.name ?? 'My job 01'
   );
   const [jobNameHovered, setJobNameHovered] = useState(false);
   const [jobNameTouched, setJobNameTouched] = useState(false);
@@ -172,6 +172,17 @@ export default function CreateJobPage() {
     }
     return { nodes: [], edges: [] };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const [canvasOverride, setCanvasOverride] = useState(null);
+
+  useEffect(() => {
+    if (locationState?.canvas || !jobData?.canvasRef) return;
+    fetch(`/data/${jobData.canvasRef}`)
+      .then(r => r.json())
+      .then(canvas => setCanvasOverride(canvas));
+  }, [jobData?.canvasRef, locationState?.canvas]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const effectiveCanvas = canvasOverride ?? savedCanvas;
 
   const [hasNodes, setHasNodes] = useState(savedCanvas.nodes.length > 0);
 
@@ -356,10 +367,11 @@ export default function CreateJobPage() {
 
             <div style={{ flex: 1, overflow: 'hidden', display: activeTabId === 'visual' ? 'flex' : 'none', flexDirection: 'column' }}>
               <AuthoringView
+                key={canvasOverride ? 'fetched' : 'default'}
                 onCanRunChange={setCanRun}
                 onCanvasStateChange={(state) => { latestCanvasState.current = state; setHasNodes(state.nodes.length > 0); }}
-                initialNodes={savedCanvas.nodes}
-                initialEdges={savedCanvas.edges}
+                initialNodes={effectiveCanvas.nodes}
+                initialEdges={effectiveCanvas.edges}
               />
             </div>
 
@@ -641,7 +653,7 @@ object GlueApp {
                           href={`/runs/${run.runId}`}
                           onFollow={e => {
                             e.preventDefault();
-                            navigate(`/runs/${run.runId}`, { state: { ...run, jobId, jobName, canvas: savedCanvas } });
+                            navigate(`/runs/${run.runId}`, { state: { ...run, jobId, jobName, canvas: effectiveCanvas } });
                           }}
                         >
                           {run.runId}

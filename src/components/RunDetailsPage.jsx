@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import JOBS from '../data/glue-jobs.json';
 import AppLayoutToolbar from '@cloudscape-design/components/app-layout-toolbar';
 import Box from '@cloudscape-design/components/box';
 import ColumnLayout from '@cloudscape-design/components/column-layout';
@@ -322,9 +323,10 @@ const IO_SERIES_STOPPED = [
 ];
 
 export default function RunDetailsPage() {
-  const { runId }        = useParams();
-  const { state: run }   = useLocation();
-  const navigate         = useNavigate();
+  const { runId }             = useParams();
+  const { state: locationRun} = useLocation();
+  const navigate              = useNavigate();
+  const [run, setRun]         = useState(locationRun);
   const [navigationOpen, setNavigationOpen]           = useState(false);
   const [toolsOpen, setToolsOpen]                     = useState(false);
   const [flashDismissed, setFlashDismissed]           = useState(false);
@@ -332,6 +334,23 @@ export default function RunDetailsPage() {
   const [stopFlashDismissed, setStopFlashDismissed]   = useState(false);
   const [runningFlashDismissed, setRunningFlashDismissed] = useState(false);
   const [stoppedOverride, setStoppedOverride]         = useState(false);
+
+  useEffect(() => {
+    if (locationRun) return;
+    let foundRun = null;
+    let foundJob = null;
+    for (const job of JOBS) {
+      const r = job.runs?.find(r => r.runId === runId);
+      if (r) { foundRun = r; foundJob = job; break; }
+    }
+    if (!foundRun || !foundJob) return;
+    const base = { ...foundRun, jobId: foundJob.id, jobName: foundJob.name, runId, returnPath: `/jobs/${foundJob.id}` };
+    if (foundJob.canvasRef) {
+      fetch(`/data/${foundJob.canvasRef}`).then(r => r.json()).then(canvas => setRun({ ...base, canvas }));
+    } else {
+      setRun({ ...base, canvas: { nodes: [], edges: [] } });
+    }
+  }, [runId, locationRun]);
 
   const jobName      = run?.jobName      ?? '—';
   const jobId        = run?.jobId        ?? null;
@@ -359,6 +378,10 @@ export default function RunDetailsPage() {
   const errorNodeLabel  = canvasNodes.find(n => n.id === errorNodeId)?.data?.label ?? null;
 
   const [selectedNodeId, setSelectedNodeId] = useState(firstNodeId);
+
+  useEffect(() => {
+    if (firstNodeId) setSelectedNodeId(firstNodeId);
+  }, [firstNodeId]);
 
   const canvasEdges        = canvas?.edges ?? [];
   const selectedCanvasNode = canvasNodes.find(n => n.id === selectedNodeId) ?? null;
