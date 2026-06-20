@@ -651,10 +651,8 @@ object GlueApp {
                       cell:   run => (
                         <Link
                           href={`/runs/${run.runId}`}
-                          onFollow={e => {
-                            e.preventDefault();
-                            navigate(`/runs/${run.runId}`, { state: { ...run, jobId, jobName, canvas: effectiveCanvas } });
-                          }}
+                          target="_blank"
+                          external
                         >
                           {run.runId}
                         </Link>
