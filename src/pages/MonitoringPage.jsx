@@ -459,8 +459,8 @@ function PageContent({
                   onDismiss={onDismissFailedAlert}
                   dismissAriaLabel="Close alert"
                   statusIconAriaLabel="Error"
-                  header={`${nonSuccessRuns.length} run${nonSuccessRuns.length > 1 ? 's' : ''} did not complete in the selected period.`}
                 >
+                  <><strong>{nonSuccessRuns.length} run{nonSuccessRuns.length > 1 ? 's' : ''}</strong> did not complete in the selected period.</>
                 </Alert>
               </div>
             )}
