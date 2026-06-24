@@ -12,6 +12,7 @@ import ColumnLayout from '@cloudscape-design/components/column-layout';
 import Container from '@cloudscape-design/components/container';
 import DateRangePicker from '@cloudscape-design/components/date-range-picker';
 import FormField from '@cloudscape-design/components/form-field';
+import Grid from '@cloudscape-design/components/grid';
 import Header from '@cloudscape-design/components/header';
 import LineChart from '@cloudscape-design/components/line-chart';
 import Link from '@cloudscape-design/components/link';
@@ -271,7 +272,7 @@ function PageContent({
   return (
     <div style={{ maxWidth: 1440, margin: '0 auto' }}>
       {/* Page header */}
-      <div style={{ padding: '20px 24px' }}>
+      <div className="monitoring-page-header">
         <Header
           variant="h1"
           description="Track performance, resource utilization, and run history across all Glue jobs."
@@ -280,10 +281,15 @@ function PageContent({
         </Header>
       </div>
 
-      <div style={{ padding: '0 24px 24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div className="monitoring-page-body" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {/* Filter bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px' }}>
-            <div style={{ flex: 1 }}>
+        <Grid
+          gridDefinition={[
+            { colspan: { default: 12, s: 8 } },
+            { colspan: { default: 12, s: 4 } },
+          ]}
+        >
+            <div>
               <FormField label="Filter by job name, status, and date to update the page charts and table">
               <PropertyFilter
                 query={filterQuery}
@@ -378,7 +384,7 @@ function PageContent({
               }}
             />
             </FormField>
-        </div>
+        </Grid>
 
         {/* Date filter conflict alert */}
         {dateConflictError && (
@@ -393,8 +399,13 @@ function PageContent({
         )}
 
         {/* Summary cards row */}
-        <div style={{ display: 'flex', gap: '16px' }}>
-          <div style={{ flex: 1 }}>
+        <Grid
+          gridDefinition={[
+            { colspan: { default: 12, s: 4 } },
+            { colspan: { default: 12, s: 4 } },
+            { colspan: { default: 12, s: 4 } },
+          ]}
+        >
           <Container
             header={
               <Header
@@ -454,9 +465,7 @@ function PageContent({
               </div>
             )}
           </Container>
-          </div>
 
-          <div style={{ flex: 1 }}>
           <Container header={<Header variant="h2">Job run success rate</Header>} fitHeight>
             <PieChart
               variant="donut"
@@ -484,9 +493,7 @@ function PageContent({
               }}
             />
           </Container>
-          </div>
 
-          <div style={{ flex: 1 }}>
           <Container header={<Header variant="h2" description="DPUs consumed by all job runs in the selected period.">DPU usage</Header>} fitHeight>
             <Box fontSize="display-l" fontWeight="bold">{totalDpuHours}</Box>
             <Box color="text-status-inactive">DPU hours this period</Box>
@@ -514,12 +521,15 @@ function PageContent({
               />
             </div>
           </Container>
-          </div>
-        </div>
+        </Grid>
 
         {/* Chart placeholders row */}
-        <div style={{ display: 'flex', gap: '16px' }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
+        <Grid
+          gridDefinition={[
+            { colspan: { default: 12, s: 6 } },
+            { colspan: { default: 12, s: 6 } },
+          ]}
+        >
             <Container
               fitHeight
               header={
@@ -548,8 +558,6 @@ function PageContent({
                 }}
               />
             </Container>
-          </div>
-          <div style={{ flex: 1, minWidth: 0 }}>
             <Container
               fitHeight
               header={
@@ -560,8 +568,7 @@ function PageContent({
             >
               <FailureHeatmap data={heatmapData} />
             </Container>
-          </div>
-        </div>
+        </Grid>
 
         {/* Duration trend placeholder */}
         <Container

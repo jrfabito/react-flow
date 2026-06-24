@@ -626,12 +626,12 @@ export default function RunDetailsPage() {
             <Header
               variant="h1"
               actions={
-                <SpaceBetween direction="horizontal" size="xs">
+                <div className="run-header-actions">
                   <Button disabled={!isRunning} onClick={() => setStoppedOverride(true)}>Stop run</Button>
                   <Button>Clone run</Button>
                   <Button onClick={() => navigate(returnPath, { state: { canvas, jobName } })}>View job</Button>
                   <Button variant="primary" iconName="external" iconAlign="right" disabled={isRunning}>View output in S3</Button>
-                </SpaceBetween>
+                </div>
               }
             >
               {jobName} - Run ID: {runId}
@@ -669,8 +669,8 @@ export default function RunDetailsPage() {
               <Container
                 disableContentPaddings
               >
-                <div style={{ display: 'flex', height: '740px' }}>
-                  <div style={{ width: '50%', height: '100%', borderRight: '1px solid #e9ebed' }}>
+                <div className="run-canvas-split">
+                  <div className="run-canvas-pane">
                     <ETLCanvas
                       key={status}
                       readOnly
@@ -682,7 +682,7 @@ export default function RunDetailsPage() {
                     />
                   </div>
 
-                  <div style={{ width: '50%', height: '100%', overflow: 'auto', padding: '24px' }}>
+                  <div className="run-details-pane">
                     {selectedCanvasNode ? (
                       <SpaceBetween direction="vertical" size="l">
                         <Header variant="h2" description="View the selected node's execution details and data preview.">
@@ -691,7 +691,7 @@ export default function RunDetailsPage() {
 
                         <KeyValuePairs columns={3} items={kvItems} />
 
-                        <div style={{ padding: '4px 0', borderBottom: '1px solid #d1d5db', margin: '0 -24px' }} />
+                        <div className="run-details-divider" style={{ padding: '4px 0', borderBottom: '1px solid #d1d5db' }} />
 
                         <Table
                           header={<Header variant="h3" counter={`(${previewData.length})`}>Data preview</Header>}

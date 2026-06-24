@@ -102,3 +102,84 @@ body.canvas-page #root {
 .s3-no-view [class*="awsui_view-button"] {
   display: none !important;
 }
+
+/* ── MonitoringPage: responsive page padding ──────────────────────────────── */
+
+.monitoring-page-header {
+  padding: 20px 24px;
+}
+
+.monitoring-page-body {
+  padding: 0 24px 24px;
+}
+
+/* Tighten gutters on small / mobile viewports so cards aren't crushed. */
+@media (max-width: 688px) {
+  .monitoring-page-header {
+    padding: 16px 16px 0;
+  }
+
+  .monitoring-page-body {
+    padding: 0 16px 16px;
+  }
+}
+
+/* ── RunDetailsPage: responsive layout ────────────────────────────────────── */
+
+/* Header action buttons wrap instead of overflowing on narrow screens. */
+.run-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Canvas / node-details split: side-by-side on desktop. */
+.run-canvas-split {
+  display: flex;
+  height: 740px;
+}
+
+.run-canvas-split > .run-canvas-pane {
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid #e9ebed;
+}
+
+.run-canvas-split > .run-details-pane {
+  width: 50%;
+  height: 100%;
+  overflow: auto;
+  padding: 24px;
+}
+
+/* Stack the split vertically on small / mobile viewports. */
+@media (max-width: 688px) {
+  .run-canvas-split {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .run-canvas-split > .run-canvas-pane {
+    width: 100%;
+    height: 360px;
+    border-right: none;
+    border-bottom: 1px solid #e9ebed;
+  }
+
+  .run-canvas-split > .run-details-pane {
+    width: 100%;
+    height: auto;
+    padding: 16px;
+  }
+}
+
+/* Edge-to-edge divider inside the node-details pane; bleed matches pane padding. */
+.run-details-divider {
+  margin: 0 -24px;
+}
+
+@media (max-width: 688px) {
+  .run-details-divider {
+    margin: 0 -16px;
+  }
+}
