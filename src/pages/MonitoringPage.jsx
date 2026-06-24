@@ -65,7 +65,7 @@ const DATE_RANGE_RELATIVE_OPTIONS = [
 const STATUS_MAP = {
   succeeded: { type: 'success',     label: 'Succeeded' },
   failed:    { type: 'error',       label: 'Failed'    },
-  running:   { type: 'in-progress', label: 'Running'   },
+  running:   { type: 'loading',     label: 'Running'   },
   stopped:   { type: 'stopped',     label: 'Stopped'   },
 };
 
