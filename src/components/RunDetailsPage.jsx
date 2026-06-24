@@ -25,7 +25,7 @@ import awsLogoUrl from '../public/images/aws-logo.svg';
 
 const NAV_ITEMS = [
   { type: 'link', text: 'Jobs',       href: '/' },
-  { type: 'link', text: 'Monitoring', href: '#/crawlers' },
+  { type: 'link', text: 'Monitoring', href: '/monitoring' },
   { type: 'divider' },
   { type: 'link', text: 'Settings',   href: '#/settings' },
 ];

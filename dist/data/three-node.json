@@ -1,0 +1,558 @@
+{
+  "nodes": [
+    {
+      "id": "node-1781836691780",
+      "type": "dataNode",
+      "position": {
+        "x": 560,
+        "y": 420
+      },
+      "selected": true,
+      "data": {
+        "type": "Source - S3",
+        "label": "S3 source 1",
+        "iconType": "s3",
+        "status": "success",
+        "config": {
+          "s3Url": "s3://prototype-data/transactions.csv",
+          "dataFormat": "csv"
+        },
+        "outputSchema": [
+          {
+            "name": "transaction_id",
+            "dataType": "string"
+          },
+          {
+            "name": "store_id",
+            "dataType": "string"
+          },
+          {
+            "name": "product_id",
+            "dataType": "string"
+          },
+          {
+            "name": "qty",
+            "dataType": "int"
+          },
+          {
+            "name": "unit_price",
+            "dataType": "double"
+          },
+          {
+            "name": "timestamp",
+            "dataType": "string"
+          },
+          {
+            "name": "payment_method",
+            "dataType": "string"
+          }
+        ],
+        "validationErrors": {
+          "s3Url": null,
+          "dataFormat": null
+        },
+        "previewData": [
+          {
+            "transaction_id": "TXN-1001",
+            "store_id": "STR-01",
+            "product_id": "PRD-201",
+            "qty": "2",
+            "unit_price": "29.99",
+            "timestamp": "2024-03-15 08:14:22",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1002",
+            "store_id": "STR-01",
+            "product_id": "PRD-305",
+            "qty": "1",
+            "unit_price": "149.99",
+            "timestamp": "2024-03-15 08:31:07",
+            "payment_method": "DEBIT"
+          },
+          {
+            "transaction_id": "TXN-1003",
+            "store_id": "STR-02",
+            "product_id": "PRD-201",
+            "qty": "3",
+            "unit_price": "29.99",
+            "timestamp": "2024-03-15 09:02:45",
+            "payment_method": "CASH"
+          },
+          {
+            "transaction_id": "TXN-1004",
+            "store_id": "STR-03",
+            "product_id": "PRD-410",
+            "qty": "1",
+            "unit_price": "89.99",
+            "timestamp": "2024-03-15 09:18:33",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1005",
+            "store_id": "TEST",
+            "product_id": "PRD-201",
+            "qty": "1",
+            "unit_price": "29.99",
+            "timestamp": "2024-03-15 09:22:11",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1006",
+            "store_id": "STR-02",
+            "product_id": "PRD-512",
+            "qty": "2",
+            "unit_price": "19.99",
+            "timestamp": "2024-03-15 10:05:58",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1007",
+            "store_id": "STR-01",
+            "product_id": "PRD-305",
+            "qty": "-1",
+            "unit_price": "149.99",
+            "timestamp": "2024-03-15 10:44:17",
+            "payment_method": "DEBIT"
+          },
+          {
+            "transaction_id": "TXN-1008",
+            "store_id": "STR-03",
+            "product_id": "PRD-610",
+            "qty": "4",
+            "unit_price": "9.99",
+            "timestamp": "2024-03-15 11:02:39",
+            "payment_method": "CASH"
+          },
+          {
+            "transaction_id": "TXN-1009",
+            "store_id": "STR-02",
+            "product_id": "PRD-410",
+            "qty": "2",
+            "unit_price": "89.99",
+            "timestamp": "2024-03-15 11:28:04",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1010",
+            "store_id": "STR-01",
+            "product_id": "PRD-512",
+            "qty": "1",
+            "unit_price": "19.99",
+            "timestamp": "2024-03-15 12:01:55",
+            "payment_method": "DEBIT"
+          },
+          {
+            "transaction_id": "TXN-1011",
+            "store_id": "STR-03",
+            "product_id": "PRD-201",
+            "qty": "2",
+            "unit_price": "29.99",
+            "timestamp": "2024-03-15 12:44:30",
+            "payment_method": "CASH"
+          },
+          {
+            "transaction_id": "TXN-1012",
+            "store_id": "STR-02",
+            "product_id": "PRD-610",
+            "qty": "6",
+            "unit_price": "9.99",
+            "timestamp": "2024-03-15 13:15:22",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1013",
+            "store_id": "STR-01",
+            "product_id": "PRD-410",
+            "qty": "1",
+            "unit_price": "89.99",
+            "timestamp": "2024-03-15 14:02:18",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1014",
+            "store_id": "STR-03",
+            "product_id": "PRD-305",
+            "qty": "2",
+            "unit_price": "149.99",
+            "timestamp": "2024-03-15 14:38:47",
+            "payment_method": "DEBIT"
+          },
+          {
+            "transaction_id": "TXN-1015",
+            "store_id": "STR-02",
+            "product_id": "PRD-201",
+            "qty": "1",
+            "unit_price": "29.99",
+            "timestamp": "2024-03-15 15:11:09",
+            "payment_method": "CASH"
+          }
+        ]
+      },
+      "measured": {
+        "width": 260,
+        "height": 80
+      },
+      "dragging": false
+    },
+    {
+      "id": "node-1781836731170",
+      "type": "dataNode",
+      "position": {
+        "x": 560,
+        "y": 620
+      },
+      "selected": false,
+      "data": {
+        "type": "Transform - Apply mapping",
+        "label": "Apply mapping transform 1",
+        "iconType": "applyMapping",
+        "status": "success",
+        "config": {
+          "mappings": [
+            {
+              "source": "transaction_id",
+              "dataType": "string",
+              "target": "transaction_id",
+              "targetType": "string",
+              "include": "yes"
+            },
+            {
+              "source": "store_id",
+              "dataType": "string",
+              "target": "store_id",
+              "targetType": "string",
+              "include": "yes"
+            },
+            {
+              "source": "product_id",
+              "dataType": "string",
+              "target": "product_id",
+              "targetType": "string",
+              "include": "yes"
+            },
+            {
+              "source": "qty",
+              "dataType": "int",
+              "target": "qty",
+              "targetType": "int",
+              "include": "yes"
+            },
+            {
+              "source": "unit_price",
+              "dataType": "double",
+              "target": "unit_price",
+              "targetType": "double",
+              "include": "yes"
+            },
+            {
+              "source": "timestamp",
+              "dataType": "string",
+              "target": "timestamp",
+              "targetType": "string",
+              "include": "yes"
+            },
+            {
+              "source": "payment_method",
+              "dataType": "string",
+              "target": "payment_method",
+              "targetType": "string",
+              "include": "yes"
+            }
+          ]
+        },
+        "outputSchema": [
+          {
+            "name": "transaction_id",
+            "dataType": "string"
+          },
+          {
+            "name": "store_id",
+            "dataType": "string"
+          },
+          {
+            "name": "product_id",
+            "dataType": "string"
+          },
+          {
+            "name": "product_name",
+            "dataType": "string"
+          },
+          {
+            "name": "category",
+            "dataType": "string"
+          },
+          {
+            "name": "department",
+            "dataType": "string"
+          },
+          {
+            "name": "quantity",
+            "dataType": "int"
+          },
+          {
+            "name": "unit_price",
+            "dataType": "double"
+          },
+          {
+            "name": "total_amount",
+            "dataType": "double"
+          },
+          {
+            "name": "sale_date",
+            "dataType": "string"
+          },
+          {
+            "name": "sale_time",
+            "dataType": "string"
+          },
+          {
+            "name": "payment_method",
+            "dataType": "string"
+          }
+        ],
+        "validationErrors": {
+          "mappings": null
+        },
+        "previewData": [
+          {
+            "transaction_id": "TXN-1001",
+            "store_id": "STR-01",
+            "product_id": "PRD-201",
+            "product_name": "Yoga Mat",
+            "category": "Fitness Equipment",
+            "department": "Sports",
+            "quantity": "2",
+            "unit_price": "29.99",
+            "total_amount": "59.98",
+            "sale_date": "2024-03-15",
+            "sale_time": "08:14:22",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1002",
+            "store_id": "STR-01",
+            "product_id": "PRD-305",
+            "product_name": "Wireless Headphones",
+            "category": "Audio",
+            "department": "Electronics",
+            "quantity": "1",
+            "unit_price": "149.99",
+            "total_amount": "149.99",
+            "sale_date": "2024-03-15",
+            "sale_time": "08:31:07",
+            "payment_method": "DEBIT"
+          },
+          {
+            "transaction_id": "TXN-1003",
+            "store_id": "STR-02",
+            "product_id": "PRD-201",
+            "product_name": "Yoga Mat",
+            "category": "Fitness Equipment",
+            "department": "Sports",
+            "quantity": "3",
+            "unit_price": "29.99",
+            "total_amount": "89.97",
+            "sale_date": "2024-03-15",
+            "sale_time": "09:02:45",
+            "payment_method": "CASH"
+          },
+          {
+            "transaction_id": "TXN-1004",
+            "store_id": "STR-03",
+            "product_id": "PRD-410",
+            "product_name": "Cast Iron Skillet",
+            "category": "Cookware",
+            "department": "Kitchen",
+            "quantity": "1",
+            "unit_price": "89.99",
+            "total_amount": "89.99",
+            "sale_date": "2024-03-15",
+            "sale_time": "09:18:33",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1006",
+            "store_id": "STR-02",
+            "product_id": "PRD-512",
+            "product_name": "Dish Towel Set",
+            "category": "Kitchen Linens",
+            "department": "Kitchen",
+            "quantity": "2",
+            "unit_price": "19.99",
+            "total_amount": "39.98",
+            "sale_date": "2024-03-15",
+            "sale_time": "10:05:58",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1008",
+            "store_id": "STR-03",
+            "product_id": "PRD-610",
+            "product_name": "Energy Bar 12pk",
+            "category": "Nutrition",
+            "department": "Grocery",
+            "quantity": "4",
+            "unit_price": "9.99",
+            "total_amount": "39.96",
+            "sale_date": "2024-03-15",
+            "sale_time": "11:02:39",
+            "payment_method": "CASH"
+          },
+          {
+            "transaction_id": "TXN-1009",
+            "store_id": "STR-02",
+            "product_id": "PRD-410",
+            "product_name": "Cast Iron Skillet",
+            "category": "Cookware",
+            "department": "Kitchen",
+            "quantity": "2",
+            "unit_price": "89.99",
+            "total_amount": "179.98",
+            "sale_date": "2024-03-15",
+            "sale_time": "11:28:04",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1010",
+            "store_id": "STR-01",
+            "product_id": "PRD-512",
+            "product_name": "Dish Towel Set",
+            "category": "Kitchen Linens",
+            "department": "Kitchen",
+            "quantity": "1",
+            "unit_price": "19.99",
+            "total_amount": "19.99",
+            "sale_date": "2024-03-15",
+            "sale_time": "12:01:55",
+            "payment_method": "DEBIT"
+          },
+          {
+            "transaction_id": "TXN-1011",
+            "store_id": "STR-03",
+            "product_id": "PRD-201",
+            "product_name": "Yoga Mat",
+            "category": "Fitness Equipment",
+            "department": "Sports",
+            "quantity": "2",
+            "unit_price": "29.99",
+            "total_amount": "59.98",
+            "sale_date": "2024-03-15",
+            "sale_time": "12:44:30",
+            "payment_method": "CASH"
+          },
+          {
+            "transaction_id": "TXN-1012",
+            "store_id": "STR-02",
+            "product_id": "PRD-610",
+            "product_name": "Energy Bar 12pk",
+            "category": "Nutrition",
+            "department": "Grocery",
+            "quantity": "6",
+            "unit_price": "9.99",
+            "total_amount": "59.94",
+            "sale_date": "2024-03-15",
+            "sale_time": "13:15:22",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1013",
+            "store_id": "STR-01",
+            "product_id": "PRD-410",
+            "product_name": "Cast Iron Skillet",
+            "category": "Cookware",
+            "department": "Kitchen",
+            "quantity": "1",
+            "unit_price": "89.99",
+            "total_amount": "89.99",
+            "sale_date": "2024-03-15",
+            "sale_time": "14:02:18",
+            "payment_method": "CREDIT"
+          },
+          {
+            "transaction_id": "TXN-1014",
+            "store_id": "STR-03",
+            "product_id": "PRD-305",
+            "product_name": "Wireless Headphones",
+            "category": "Audio",
+            "department": "Electronics",
+            "quantity": "2",
+            "unit_price": "149.99",
+            "total_amount": "299.98",
+            "sale_date": "2024-03-15",
+            "sale_time": "14:38:47",
+            "payment_method": "DEBIT"
+          },
+          {
+            "transaction_id": "TXN-1015",
+            "store_id": "STR-02",
+            "product_id": "PRD-201",
+            "product_name": "Yoga Mat",
+            "category": "Fitness Equipment",
+            "department": "Sports",
+            "quantity": "1",
+            "unit_price": "29.99",
+            "total_amount": "29.99",
+            "sale_date": "2024-03-15",
+            "sale_time": "15:11:09",
+            "payment_method": "CASH"
+          }
+        ]
+      },
+      "measured": {
+        "width": 260,
+        "height": 80
+      },
+      "dragging": false
+    },
+    {
+      "id": "node-1781836755171",
+      "type": "dataNode",
+      "position": {
+        "x": 560,
+        "y": 820
+      },
+      "selected": false,
+      "data": {
+        "type": "Target - S3",
+        "label": "Amazon S3 target 2",
+        "iconType": "s3",
+        "status": "success",
+        "config": {
+          "dataFormat": "parquet",
+          "registerToCatalog": true,
+          "dataInputNodeId": "node-1781836731170",
+          "s3Location": "s3://retail-raw",
+          "catalogDatabase": "retail_staging",
+          "catalogTable": "raw_events"
+        },
+        "outputSchema": [],
+        "validationErrors": {
+          "dataInputNodeId": null,
+          "s3Location": null,
+          "catalogDatabase": null,
+          "catalogTable": null
+        }
+      },
+      "measured": {
+        "width": 260,
+        "height": 80
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-node-1781836731170-node-1781836755171",
+      "source": "node-1781836731170",
+      "target": "node-1781836755171",
+      "type": "etlEdge"
+    },
+    {
+      "type": "etlEdge",
+      "source": "node-1781836691780",
+      "target": "node-1781836731170",
+      "id": "xy-edge__node-1781836691780-node-1781836731170"
+    }
+  ]
+}

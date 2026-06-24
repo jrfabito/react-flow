@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    {
+      "id": "jan-s3",
+      "type": "dataNode",
+      "position": { "x": 30, "y": 30 },
+      "data": { "type": "Source - S3", "label": "Jan Sales Data", "iconType": "s3", "status": "success" }
+    },
+    {
+      "id": "feb-rds",
+      "type": "dataNode",
+      "position": { "x": 430, "y": 30 },
+      "data": { "type": "Source - RDS", "label": "Feb Sales Data", "iconType": "rds", "status": "success" }
+    },
+    {
+      "id": "union",
+      "type": "dataNode",
+      "position": { "x": 225, "y": 230 },
+      "selected": true,
+      "data": { "type": "Transform - Union", "label": "Unite Jan/Dec Sales", "iconType": "union", "status": "success" }
+    },
+    {
+      "id": "target-s3",
+      "type": "dataNode",
+      "position": { "x": 0, "y": 440 },
+      "data": { "type": "Target - S3", "label": "My Final Data", "iconType": "s3", "status": "success" }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "type": "etlEdge", "source": "jan-s3",  "target": "union" },
+    { "id": "e2", "type": "etlEdge", "source": "feb-rds", "target": "union" },
+    { "id": "e3", "type": "etlEdge", "source": "union",   "target": "target-s3" }
+  ]
+}

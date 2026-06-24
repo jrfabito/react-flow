@@ -11,11 +11,32 @@
         "status": "Running",
         "startTime": "2026-06-19T02:00:03Z",
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 18432, "rowsProcessed": 18432, "nodeExecutionTime": "0m 21s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 15s" },
-          "node-1781836704560": { "rowsIngestedLeft": 18432, "rowsIngestedRight": 8801, "rowsProcessed": 0, "nodeExecutionTime": "—" },
-          "node-1781836731170": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": "—" },
-          "node-1781836755171": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": "—" }
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
         }
       },
       {
@@ -26,11 +47,32 @@
         "totalRecords": 24819,
         "dpuHours": 0.161,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 24819, "rowsProcessed": 24819, "nodeExecutionTime": "0m 22s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 15s" },
-          "node-1781836704560": { "rowsIngestedLeft": 24819, "rowsIngestedRight": 8801, "rowsProcessed": 24312, "nodeExecutionTime": "0m 38s" },
-          "node-1781836731170": { "rowsIngested": 24312, "rowsProcessed": 24312, "nodeExecutionTime": "0m 11s" },
-          "node-1781836755171": { "rowsIngested": 24312, "rowsProcessed": 24312, "nodeExecutionTime": "0m 19s" }
+          "node-1781836691780": {
+            "rowsIngested": 24819,
+            "rowsProcessed": 24819,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 24819,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 24312,
+            "nodeExecutionTime": "0m 38s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 24312,
+            "rowsProcessed": 24312,
+            "nodeExecutionTime": "0m 11s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 24312,
+            "rowsProcessed": 24312,
+            "nodeExecutionTime": "0m 19s"
+          }
         }
       },
       {
@@ -41,11 +83,32 @@
         "totalRecords": 31204,
         "dpuHours": 0.168,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 31204, "rowsProcessed": 31204, "nodeExecutionTime": "0m 24s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 14s" },
-          "node-1781836704560": { "rowsIngestedLeft": 31204, "rowsIngestedRight": 8801, "rowsProcessed": 30891, "nodeExecutionTime": "0m 44s" },
-          "node-1781836731170": { "rowsIngested": 30891, "rowsProcessed": 30891, "nodeExecutionTime": "0m 13s" },
-          "node-1781836755171": { "rowsIngested": 30891, "rowsProcessed": 30891, "nodeExecutionTime": "0m 22s" }
+          "node-1781836691780": {
+            "rowsIngested": 31204,
+            "rowsProcessed": 31204,
+            "nodeExecutionTime": "0m 24s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 14s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 31204,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 30891,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 30891,
+            "rowsProcessed": 30891,
+            "nodeExecutionTime": "0m 13s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 30891,
+            "rowsProcessed": 30891,
+            "nodeExecutionTime": "0m 22s"
+          }
         }
       },
       {
@@ -57,11 +120,32 @@
         "totalRecords": 0,
         "dpuHours": 0.046,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 24104, "rowsProcessed": 24104, "nodeExecutionTime": "0m 19s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 14s" },
-          "node-1781836704560": { "rowsIngestedLeft": 24104, "rowsIngestedRight": 8801, "rowsProcessed": 0, "nodeExecutionTime": "0m 04s" },
-          "node-1781836731170": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null },
-          "node-1781836755171": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null }
+          "node-1781836691780": {
+            "rowsIngested": 24104,
+            "rowsProcessed": 24104,
+            "nodeExecutionTime": "0m 19s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 14s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 24104,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": null
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": null
+          }
         }
       },
       {
@@ -72,11 +156,32 @@
         "totalRecords": 28471,
         "dpuHours": 0.155,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 28471, "rowsProcessed": 28471, "nodeExecutionTime": "0m 21s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 13s" },
-          "node-1781836704560": { "rowsIngestedLeft": 28471, "rowsIngestedRight": 8801, "rowsProcessed": 28104, "nodeExecutionTime": "0m 41s" },
-          "node-1781836731170": { "rowsIngested": 28104, "rowsProcessed": 28104, "nodeExecutionTime": "0m 12s" },
-          "node-1781836755171": { "rowsIngested": 28104, "rowsProcessed": 28104, "nodeExecutionTime": "0m 20s" }
+          "node-1781836691780": {
+            "rowsIngested": 28471,
+            "rowsProcessed": 28471,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 13s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 28471,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 28104,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 28104,
+            "rowsProcessed": 28104,
+            "nodeExecutionTime": "0m 12s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 28104,
+            "rowsProcessed": 28104,
+            "nodeExecutionTime": "0m 20s"
+          }
         }
       },
       {
@@ -87,11 +192,426 @@
         "totalRecords": 41032,
         "dpuHours": 0.207,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 41032, "rowsProcessed": 41032, "nodeExecutionTime": "0m 28s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 15s" },
-          "node-1781836704560": { "rowsIngestedLeft": 41032, "rowsIngestedRight": 8801, "rowsProcessed": 40219, "nodeExecutionTime": "0m 52s" },
-          "node-1781836731170": { "rowsIngested": 40219, "rowsProcessed": 40219, "nodeExecutionTime": "0m 16s" },
-          "node-1781836755171": { "rowsIngested": 40219, "rowsProcessed": 40219, "nodeExecutionTime": "0m 25s" }
+          "node-1781836691780": {
+            "rowsIngested": 41032,
+            "rowsProcessed": 41032,
+            "nodeExecutionTime": "0m 28s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 41032,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 40219,
+            "nodeExecutionTime": "0m 52s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 40219,
+            "rowsProcessed": 40219,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 40219,
+            "rowsProcessed": 40219,
+            "nodeExecutionTime": "0m 25s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-244",
+        "status": "Running",
+        "startTime": "2026-05-15T11:45:00Z",
+        "dpuHours": 0.05,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1XY",
+        "status": "Succeeded",
+        "startTime": "2026-05-15T01:00:00Z",
+        "endTime": "2026-05-15T01:04:07Z",
+        "totalRecords": 13,
+        "dpuHours": 0.1,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1WX",
+        "status": "Succeeded",
+        "startTime": "2026-05-14T20:45:00Z",
+        "endTime": "2026-05-14T20:49:12Z",
+        "totalRecords": 13,
+        "dpuHours": 0.11,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1RS",
+        "status": "Succeeded",
+        "startTime": "2026-05-14T01:15:00Z",
+        "endTime": "2026-05-14T01:18:55Z",
+        "totalRecords": 13,
+        "dpuHours": 0.1,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1MN",
+        "status": "Succeeded",
+        "startTime": "2026-05-13T06:00:00Z",
+        "endTime": "2026-05-13T06:04:10Z",
+        "totalRecords": 13,
+        "dpuHours": 0.1,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1FG",
+        "status": "Succeeded",
+        "startTime": "2026-05-12T05:30:00Z",
+        "endTime": "2026-05-12T05:34:18Z",
+        "totalRecords": 13,
+        "dpuHours": 0.11,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1DE",
+        "status": "Succeeded",
+        "startTime": "2026-05-11T19:20:00Z",
+        "endTime": "2026-05-11T19:23:40Z",
+        "totalRecords": 13,
+        "dpuHours": 0.12,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-189",
+        "status": "Succeeded",
+        "startTime": "2026-05-11T01:30:00Z",
+        "endTime": "2026-05-11T01:34:05Z",
+        "totalRecords": 13,
+        "dpuHours": 0.1,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-156",
+        "status": "Succeeded",
+        "startTime": "2026-05-10T05:00:00Z",
+        "endTime": "2026-05-10T05:04:08Z",
+        "totalRecords": 13,
+        "dpuHours": 0.1,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-134",
+        "status": "Succeeded",
+        "startTime": "2026-05-09T20:10:00Z",
+        "endTime": "2026-05-09T20:14:33Z",
+        "totalRecords": 13,
+        "dpuHours": 0.11,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-101",
+        "status": "Succeeded",
+        "startTime": "2026-05-09T02:15:00Z",
+        "endTime": "2026-05-09T02:18:48Z",
+        "totalRecords": 13,
+        "dpuHours": 0.1,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 18432,
+            "rowsProcessed": 18432,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 18432,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "—"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "-"
+          }
         }
       }
     ]
@@ -111,9 +631,21 @@
         "totalRecords": 198340,
         "dpuHours": 0.623,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 198340, "rowsProcessed": 198340, "nodeExecutionTime": "1m 52s" },
-          "node-1781836731170": { "rowsIngested": 198340, "rowsProcessed": 197918, "nodeExecutionTime": "0m 44s" },
-          "node-1781836755171": { "rowsIngested": 197918, "rowsProcessed": 197918, "nodeExecutionTime": "1m 08s" }
+          "node-1781836691780": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 198340,
+            "nodeExecutionTime": "1m 52s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 197918,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "1m 08s"
+          }
         }
       },
       {
@@ -124,9 +656,21 @@
         "totalRecords": 195812,
         "dpuHours": 0.598,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 195812, "rowsProcessed": 195812, "nodeExecutionTime": "1m 48s" },
-          "node-1781836731170": { "rowsIngested": 195812, "rowsProcessed": 195401, "nodeExecutionTime": "0m 43s" },
-          "node-1781836755171": { "rowsIngested": 195401, "rowsProcessed": 195401, "nodeExecutionTime": "1m 05s" }
+          "node-1781836691780": {
+            "rowsIngested": 195812,
+            "rowsProcessed": 195812,
+            "nodeExecutionTime": "1m 48s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 195812,
+            "rowsProcessed": 195401,
+            "nodeExecutionTime": "0m 43s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 195401,
+            "rowsProcessed": 195401,
+            "nodeExecutionTime": "1m 05s"
+          }
         }
       },
       {
@@ -137,9 +681,21 @@
         "totalRecords": 202107,
         "dpuHours": 0.701,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 202107, "rowsProcessed": 202107, "nodeExecutionTime": "1m 58s" },
-          "node-1781836731170": { "rowsIngested": 202107, "rowsProcessed": 201643, "nodeExecutionTime": "0m 46s" },
-          "node-1781836755171": { "rowsIngested": 201643, "rowsProcessed": 201643, "nodeExecutionTime": "1m 12s" }
+          "node-1781836691780": {
+            "rowsIngested": 202107,
+            "rowsProcessed": 202107,
+            "nodeExecutionTime": "1m 58s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 202107,
+            "rowsProcessed": 201643,
+            "nodeExecutionTime": "0m 46s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 201643,
+            "rowsProcessed": 201643,
+            "nodeExecutionTime": "1m 12s"
+          }
         }
       },
       {
@@ -150,9 +706,21 @@
         "totalRecords": 87644,
         "dpuHours": 0.319,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 90012, "rowsProcessed": 90012, "nodeExecutionTime": "0m 51s" },
-          "node-1781836731170": { "rowsIngested": 87644, "rowsProcessed": 87644, "nodeExecutionTime": "0m 19s" },
-          "node-1781836755171": { "rowsIngested": 87644, "rowsProcessed": 0,      "nodeExecutionTime": null }
+          "node-1781836691780": {
+            "rowsIngested": 90012,
+            "rowsProcessed": 90012,
+            "nodeExecutionTime": "0m 51s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 87644,
+            "rowsProcessed": 87644,
+            "nodeExecutionTime": "0m 19s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 87644,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": null
+          }
         }
       },
       {
@@ -163,9 +731,220 @@
         "totalRecords": 191530,
         "dpuHours": 0.548,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 191530, "rowsProcessed": 191530, "nodeExecutionTime": "1m 44s" },
-          "node-1781836731170": { "rowsIngested": 191530, "rowsProcessed": 191102, "nodeExecutionTime": "0m 41s" },
-          "node-1781836755171": { "rowsIngested": 191102, "rowsProcessed": 191102, "nodeExecutionTime": "0m 59s" }
+          "node-1781836691780": {
+            "rowsIngested": 191530,
+            "rowsProcessed": 191530,
+            "nodeExecutionTime": "1m 44s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 191530,
+            "rowsProcessed": 191102,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 191102,
+            "rowsProcessed": 191102,
+            "nodeExecutionTime": "0m 59s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-233",
+        "status": "Running",
+        "startTime": "2026-05-15T11:00:00Z",
+        "dpuHours": 0.2,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 198340,
+            "nodeExecutionTime": "1m 52s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 197918,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "1m 08s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1YZ",
+        "status": "Succeeded",
+        "startTime": "2026-05-15T04:30:00Z",
+        "endTime": "2026-05-15T04:42:30Z",
+        "totalRecords": 48300,
+        "dpuHours": 0.43,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 198340,
+            "nodeExecutionTime": "1m 52s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 197918,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "1m 08s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1UV",
+        "status": "Succeeded",
+        "startTime": "2026-05-14T11:30:00Z",
+        "endTime": "2026-05-14T11:41:45Z",
+        "totalRecords": 48000,
+        "dpuHours": 0.4,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 198340,
+            "nodeExecutionTime": "1m 52s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 197918,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "1m 08s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-288",
+        "status": "Stopped",
+        "startTime": "2026-05-14T09:00:00Z",
+        "endTime": "2026-05-14T09:03:05Z",
+        "totalRecords": 0,
+        "dpuHours": 0,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 198340,
+            "nodeExecutionTime": "1m 52s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 197918,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "1m 08s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1PQ",
+        "status": "Succeeded",
+        "startTime": "2026-05-13T15:20:00Z",
+        "endTime": "2026-05-13T15:33:00Z",
+        "totalRecords": 48700,
+        "dpuHours": 0.45,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 198340,
+            "nodeExecutionTime": "1m 52s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 197918,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "1m 08s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1KL",
+        "status": "Failed",
+        "errorNodeId": "node-1781836755171",
+        "startTime": "2026-05-13T02:30:00Z",
+        "endTime": "2026-05-13T02:31:50Z",
+        "totalRecords": 0,
+        "dpuHours": 0.05,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 198340,
+            "nodeExecutionTime": "1m 52s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 197918,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "1m 08s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1EF",
+        "status": "Succeeded",
+        "startTime": "2026-05-12T02:45:00Z",
+        "endTime": "2026-05-12T02:57:15Z",
+        "totalRecords": 48050,
+        "dpuHours": 0.41,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 198340,
+            "nodeExecutionTime": "1m 52s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 197918,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "1m 08s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1AB",
+        "status": "Succeeded",
+        "startTime": "2026-05-11T09:00:00Z",
+        "endTime": "2026-05-11T09:12:50Z",
+        "totalRecords": 48500,
+        "dpuHours": 0.44,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 198340,
+            "nodeExecutionTime": "1m 52s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 198340,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 197918,
+            "rowsProcessed": 197918,
+            "nodeExecutionTime": "1m 08s"
+          }
         }
       }
     ]
@@ -185,9 +964,21 @@
         "totalRecords": 8204,
         "dpuHours": 0.089,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 8204, "rowsProcessed": 8204, "nodeExecutionTime": "0m 09s" },
-          "node-1781836731170": { "rowsIngested": 8204, "rowsProcessed": 8201, "nodeExecutionTime": "0m 04s" },
-          "node-1781836755171": { "rowsIngested": 8201, "rowsProcessed": 8201, "nodeExecutionTime": "0m 07s" }
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
         }
       },
       {
@@ -198,9 +989,21 @@
         "totalRecords": 7918,
         "dpuHours": 0.099,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 7918, "rowsProcessed": 7918, "nodeExecutionTime": "0m 09s" },
-          "node-1781836731170": { "rowsIngested": 7918, "rowsProcessed": 7915, "nodeExecutionTime": "0m 04s" },
-          "node-1781836755171": { "rowsIngested": 7915, "rowsProcessed": 7915, "nodeExecutionTime": "0m 07s" }
+          "node-1781836691780": {
+            "rowsIngested": 7918,
+            "rowsProcessed": 7918,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 7918,
+            "rowsProcessed": 7915,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 7915,
+            "rowsProcessed": 7915,
+            "nodeExecutionTime": "0m 07s"
+          }
         }
       },
       {
@@ -212,9 +1015,21 @@
         "totalRecords": 0,
         "dpuHours": 0.013,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 402, "rowsProcessed": 0, "nodeExecutionTime": "0m 01s" },
-          "node-1781836731170": { "rowsIngested": 0,   "rowsProcessed": 0, "nodeExecutionTime": null },
-          "node-1781836755171": { "rowsIngested": 0,   "rowsProcessed": 0, "nodeExecutionTime": null }
+          "node-1781836691780": {
+            "rowsIngested": 402,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "0m 01s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": null
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": null
+          }
         }
       },
       {
@@ -225,9 +1040,21 @@
         "totalRecords": 8551,
         "dpuHours": 0.107,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 8551, "rowsProcessed": 8551, "nodeExecutionTime": "0m 10s" },
-          "node-1781836731170": { "rowsIngested": 8551, "rowsProcessed": 8548, "nodeExecutionTime": "0m 04s" },
-          "node-1781836755171": { "rowsIngested": 8548, "rowsProcessed": 8548, "nodeExecutionTime": "0m 07s" }
+          "node-1781836691780": {
+            "rowsIngested": 8551,
+            "rowsProcessed": 8551,
+            "nodeExecutionTime": "0m 10s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8551,
+            "rowsProcessed": 8548,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8548,
+            "rowsProcessed": 8548,
+            "nodeExecutionTime": "0m 07s"
+          }
         }
       },
       {
@@ -238,9 +1065,270 @@
         "totalRecords": 7703,
         "dpuHours": 0.085,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 7703, "rowsProcessed": 7703, "nodeExecutionTime": "0m 08s" },
-          "node-1781836731170": { "rowsIngested": 7703, "rowsProcessed": 7700, "nodeExecutionTime": "0m 04s" },
-          "node-1781836755171": { "rowsIngested": 7700, "rowsProcessed": 7700, "nodeExecutionTime": "0m 07s" }
+          "node-1781836691780": {
+            "rowsIngested": 7703,
+            "rowsProcessed": 7703,
+            "nodeExecutionTime": "0m 08s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 7703,
+            "rowsProcessed": 7700,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 7700,
+            "rowsProcessed": 7700,
+            "nodeExecutionTime": "0m 07s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-255",
+        "status": "Running",
+        "startTime": "2026-05-15T12:15:00Z",
+        "dpuHours": 0.1,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-200",
+        "status": "Succeeded",
+        "startTime": "2026-05-15T07:00:00Z",
+        "endTime": "2026-05-15T07:08:15Z",
+        "totalRecords": 12100,
+        "dpuHours": 0.21,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1TU",
+        "status": "Succeeded",
+        "startTime": "2026-05-14T08:00:00Z",
+        "endTime": "2026-05-14T08:07:35Z",
+        "totalRecords": 11900,
+        "dpuHours": 0.19,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1NO",
+        "status": "Succeeded",
+        "startTime": "2026-05-13T09:30:00Z",
+        "endTime": "2026-05-13T09:38:05Z",
+        "totalRecords": 12020,
+        "dpuHours": 0.2,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1JK",
+        "status": "Succeeded",
+        "startTime": "2026-05-12T22:10:00Z",
+        "endTime": "2026-05-12T22:18:40Z",
+        "totalRecords": 12300,
+        "dpuHours": 0.22,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1GH",
+        "status": "Succeeded",
+        "startTime": "2026-05-12T08:15:00Z",
+        "endTime": "2026-05-12T08:22:48Z",
+        "totalRecords": 12000,
+        "dpuHours": 0.2,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-266",
+        "status": "Stopped",
+        "startTime": "2026-05-11T10:00:00Z",
+        "endTime": "2026-05-11T10:02:10Z",
+        "totalRecords": 0,
+        "dpuHours": 0,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-19A",
+        "status": "Failed",
+        "errorNodeId": "node-1781836691780",
+        "startTime": "2026-05-11T07:20:00Z",
+        "endTime": "2026-05-11T07:22:20Z",
+        "totalRecords": 0,
+        "dpuHours": 0.06,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-167",
+        "status": "Succeeded",
+        "startTime": "2026-05-10T11:15:00Z",
+        "endTime": "2026-05-10T11:23:22Z",
+        "totalRecords": 12150,
+        "dpuHours": 0.21,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-112",
+        "status": "Succeeded",
+        "startTime": "2026-05-09T06:00:00Z",
+        "endTime": "2026-05-09T06:07:30Z",
+        "totalRecords": 11980,
+        "dpuHours": 0.19,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8204,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 8204,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 04s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 8201,
+            "rowsProcessed": 8201,
+            "nodeExecutionTime": "0m 07s"
+          }
         }
       }
     ]
@@ -260,11 +1348,32 @@
         "totalRecords": 523801,
         "dpuHours": 0.391,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 523801, "rowsProcessed": 523801, "nodeExecutionTime": "1m 14s" },
-          "node-1781836712031": { "rowsIngested": 8801,   "rowsProcessed": 8801,   "nodeExecutionTime": "0m 18s" },
-          "node-1781836704560": { "rowsIngestedLeft": 523801, "rowsIngestedRight": 8801, "rowsProcessed": 511204, "nodeExecutionTime": "2m 22s" },
-          "node-1781836731170": { "rowsIngested": 511204, "rowsProcessed": 511204, "nodeExecutionTime": "0m 48s" },
-          "node-1781836755171": { "rowsIngested": 511204, "rowsProcessed": 511204, "nodeExecutionTime": "1m 22s" }
+          "node-1781836691780": {
+            "rowsIngested": 523801,
+            "rowsProcessed": 523801,
+            "nodeExecutionTime": "1m 14s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 18s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 523801,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "2m 22s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "0m 48s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "1m 22s"
+          }
         }
       },
       {
@@ -275,11 +1384,32 @@
         "totalRecords": 498234,
         "dpuHours": 0.366,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 498234, "rowsProcessed": 498234, "nodeExecutionTime": "1m 08s" },
-          "node-1781836712031": { "rowsIngested": 8801,   "rowsProcessed": 8801,   "nodeExecutionTime": "0m 17s" },
-          "node-1781836704560": { "rowsIngestedLeft": 498234, "rowsIngestedRight": 8801, "rowsProcessed": 485912, "nodeExecutionTime": "2m 16s" },
-          "node-1781836731170": { "rowsIngested": 485912, "rowsProcessed": 485912, "nodeExecutionTime": "0m 44s" },
-          "node-1781836755171": { "rowsIngested": 485912, "rowsProcessed": 485912, "nodeExecutionTime": "1m 17s" }
+          "node-1781836691780": {
+            "rowsIngested": 498234,
+            "rowsProcessed": 498234,
+            "nodeExecutionTime": "1m 08s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 17s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 498234,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 485912,
+            "nodeExecutionTime": "2m 16s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 485912,
+            "rowsProcessed": 485912,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 485912,
+            "rowsProcessed": 485912,
+            "nodeExecutionTime": "1m 17s"
+          }
         }
       },
       {
@@ -290,11 +1420,32 @@
         "totalRecords": 611429,
         "dpuHours": 0.438,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 611429, "rowsProcessed": 611429, "nodeExecutionTime": "1m 28s" },
-          "node-1781836712031": { "rowsIngested": 8801,   "rowsProcessed": 8801,   "nodeExecutionTime": "0m 18s" },
-          "node-1781836704560": { "rowsIngestedLeft": 611429, "rowsIngestedRight": 8801, "rowsProcessed": 598701, "nodeExecutionTime": "2m 41s" },
-          "node-1781836731170": { "rowsIngested": 598701, "rowsProcessed": 598701, "nodeExecutionTime": "0m 56s" },
-          "node-1781836755171": { "rowsIngested": 598701, "rowsProcessed": 598701, "nodeExecutionTime": "1m 31s" }
+          "node-1781836691780": {
+            "rowsIngested": 611429,
+            "rowsProcessed": 611429,
+            "nodeExecutionTime": "1m 28s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 18s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 611429,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 598701,
+            "nodeExecutionTime": "2m 41s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 598701,
+            "rowsProcessed": 598701,
+            "nodeExecutionTime": "0m 56s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 598701,
+            "rowsProcessed": 598701,
+            "nodeExecutionTime": "1m 31s"
+          }
         }
       },
       {
@@ -306,11 +1457,32 @@
         "totalRecords": 0,
         "dpuHours": 0.076,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 611201, "rowsProcessed": 611201, "nodeExecutionTime": "1m 26s" },
-          "node-1781836712031": { "rowsIngested": 8801,   "rowsProcessed": 8801,   "nodeExecutionTime": "0m 17s" },
-          "node-1781836704560": { "rowsIngestedLeft": 611201, "rowsIngestedRight": 8801, "rowsProcessed": 0, "nodeExecutionTime": "0m 13s" },
-          "node-1781836731170": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null },
-          "node-1781836755171": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null }
+          "node-1781836691780": {
+            "rowsIngested": 611201,
+            "rowsProcessed": 611201,
+            "nodeExecutionTime": "1m 26s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 17s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 611201,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "0m 13s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": null
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": null
+          }
         }
       },
       {
@@ -321,11 +1493,248 @@
         "totalRecords": 487116,
         "dpuHours": 0.328,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 487116, "rowsProcessed": 487116, "nodeExecutionTime": "1m 05s" },
-          "node-1781836712031": { "rowsIngested": 8801,   "rowsProcessed": 8801,   "nodeExecutionTime": "0m 16s" },
-          "node-1781836704560": { "rowsIngestedLeft": 487116, "rowsIngestedRight": 8801, "rowsProcessed": 474901, "nodeExecutionTime": "2m 12s" },
-          "node-1781836731170": { "rowsIngested": 474901, "rowsProcessed": 474901, "nodeExecutionTime": "0m 43s" },
-          "node-1781836755171": { "rowsIngested": 474901, "rowsProcessed": 474901, "nodeExecutionTime": "1m 15s" }
+          "node-1781836691780": {
+            "rowsIngested": 487116,
+            "rowsProcessed": 487116,
+            "nodeExecutionTime": "1m 05s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 487116,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 474901,
+            "nodeExecutionTime": "2m 12s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 474901,
+            "rowsProcessed": 474901,
+            "nodeExecutionTime": "0m 43s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 474901,
+            "rowsProcessed": 474901,
+            "nodeExecutionTime": "1m 15s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-222",
+        "status": "Running",
+        "startTime": "2026-05-15T10:30:00Z",
+        "dpuHours": 0.3,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 523801,
+            "rowsProcessed": 523801,
+            "nodeExecutionTime": "1m 14s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 18s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 523801,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "2m 22s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "0m 48s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "1m 22s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1ST",
+        "status": "Failed",
+        "errorNodeId": "node-1781836704560",
+        "startTime": "2026-05-14T04:40:00Z",
+        "endTime": "2026-05-14T04:42:55Z",
+        "totalRecords": 0,
+        "dpuHours": 0.09,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 523801,
+            "rowsProcessed": 523801,
+            "nodeExecutionTime": "1m 14s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 18s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 523801,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "2m 22s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "0m 48s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "1m 22s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1QR",
+        "status": "Succeeded",
+        "startTime": "2026-05-13T19:00:00Z",
+        "endTime": "2026-05-13T19:18:55Z",
+        "totalRecords": 95500,
+        "dpuHours": 0.64,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 523801,
+            "rowsProcessed": 523801,
+            "nodeExecutionTime": "1m 14s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 18s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 523801,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "2m 22s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "0m 48s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "1m 22s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1LM",
+        "status": "Failed",
+        "errorNodeId": "node-1781836704560",
+        "startTime": "2026-05-13T03:15:00Z",
+        "endTime": "2026-05-13T03:17:45Z",
+        "totalRecords": 0,
+        "dpuHours": 0.08,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 523801,
+            "rowsProcessed": 523801,
+            "nodeExecutionTime": "1m 14s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 18s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 523801,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "2m 22s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "0m 48s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "1m 22s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1HI",
+        "status": "Succeeded",
+        "startTime": "2026-05-12T13:00:00Z",
+        "endTime": "2026-05-12T13:17:25Z",
+        "totalRecords": 94900,
+        "dpuHours": 0.59,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 523801,
+            "rowsProcessed": 523801,
+            "nodeExecutionTime": "1m 14s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 18s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 523801,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "2m 22s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "0m 48s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "1m 22s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1BC",
+        "status": "Succeeded",
+        "startTime": "2026-05-11T12:30:00Z",
+        "endTime": "2026-05-11T12:48:10Z",
+        "totalRecords": 95100,
+        "dpuHours": 0.61,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 523801,
+            "rowsProcessed": 523801,
+            "nodeExecutionTime": "1m 14s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 18s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 523801,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "2m 22s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "0m 48s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 511204,
+            "rowsProcessed": 511204,
+            "nodeExecutionTime": "1m 22s"
+          }
         }
       }
     ]
@@ -345,11 +1754,32 @@
         "totalRecords": 74392,
         "dpuHours": 0.301,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 74392, "rowsProcessed": 74392, "nodeExecutionTime": "0m 41s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 16s" },
-          "node-1781836704560": { "rowsIngestedLeft": 74392, "rowsIngestedRight": 8801, "rowsProcessed": 72918, "nodeExecutionTime": "1m 04s" },
-          "node-1781836731170": { "rowsIngested": 72918, "rowsProcessed": 72918, "nodeExecutionTime": "0m 22s" },
-          "node-1781836755171": { "rowsIngested": 72918, "rowsProcessed": 72918, "nodeExecutionTime": "0m 34s" }
+          "node-1781836691780": {
+            "rowsIngested": 74392,
+            "rowsProcessed": 74392,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 74392,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "1m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 34s"
+          }
         }
       },
       {
@@ -361,11 +1791,32 @@
         "totalRecords": 0,
         "dpuHours": 0.124,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 68201, "rowsProcessed": 68201, "nodeExecutionTime": "0m 37s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 14s" },
-          "node-1781836704560": { "rowsIngestedLeft": 68201, "rowsIngestedRight": 8801, "rowsProcessed": 0, "nodeExecutionTime": "0m 09s" },
-          "node-1781836731170": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null },
-          "node-1781836755171": { "rowsIngested": 0, "rowsProcessed": 0, "nodeExecutionTime": null }
+          "node-1781836691780": {
+            "rowsIngested": 68201,
+            "rowsProcessed": 68201,
+            "nodeExecutionTime": "0m 37s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 14s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 68201,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": "0m 09s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": null
+          },
+          "node-1781836755171": {
+            "rowsIngested": 0,
+            "rowsProcessed": 0,
+            "nodeExecutionTime": null
+          }
         }
       },
       {
@@ -376,11 +1827,357 @@
         "totalRecords": 68904,
         "dpuHours": 0.284,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 68904, "rowsProcessed": 68904, "nodeExecutionTime": "0m 38s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 14s" },
-          "node-1781836704560": { "rowsIngestedLeft": 68904, "rowsIngestedRight": 8801, "rowsProcessed": 67401, "nodeExecutionTime": "0m 59s" },
-          "node-1781836731170": { "rowsIngested": 67401, "rowsProcessed": 67401, "nodeExecutionTime": "0m 20s" },
-          "node-1781836755171": { "rowsIngested": 67401, "rowsProcessed": 67401, "nodeExecutionTime": "0m 31s" }
+          "node-1781836691780": {
+            "rowsIngested": 68904,
+            "rowsProcessed": 68904,
+            "nodeExecutionTime": "0m 38s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 14s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 68904,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 67401,
+            "nodeExecutionTime": "0m 59s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 67401,
+            "rowsProcessed": 67401,
+            "nodeExecutionTime": "0m 20s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 67401,
+            "rowsProcessed": 67401,
+            "nodeExecutionTime": "0m 31s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-211",
+        "status": "Succeeded",
+        "startTime": "2026-05-15T09:15:00Z",
+        "endTime": "2026-05-15T09:20:38Z",
+        "totalRecords": 7850,
+        "dpuHours": 0.14,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 74392,
+            "rowsProcessed": 74392,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 74392,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "1m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 34s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1VW",
+        "status": "Succeeded",
+        "startTime": "2026-05-14T16:00:00Z",
+        "endTime": "2026-05-14T16:06:20Z",
+        "totalRecords": 8200,
+        "dpuHours": 0.16,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 74392,
+            "rowsProcessed": 74392,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 74392,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "1m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 34s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1OP",
+        "status": "Succeeded",
+        "startTime": "2026-05-13T12:00:00Z",
+        "endTime": "2026-05-13T12:05:50Z",
+        "totalRecords": 7900,
+        "dpuHours": 0.14,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 74392,
+            "rowsProcessed": 74392,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 74392,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "1m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 34s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1IJ",
+        "status": "Succeeded",
+        "startTime": "2026-05-12T17:30:00Z",
+        "endTime": "2026-05-12T17:36:08Z",
+        "totalRecords": 8000,
+        "dpuHours": 0.15,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 74392,
+            "rowsProcessed": 74392,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 74392,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "1m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 34s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-277",
+        "status": "Stopped",
+        "startTime": "2026-05-12T15:00:00Z",
+        "endTime": "2026-05-12T15:01:30Z",
+        "totalRecords": 0,
+        "dpuHours": 0,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 74392,
+            "rowsProcessed": 74392,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 74392,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "1m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 34s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-1CD",
+        "status": "Succeeded",
+        "startTime": "2026-05-11T15:45:00Z",
+        "endTime": "2026-05-11T15:51:30Z",
+        "totalRecords": 8100,
+        "dpuHours": 0.16,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 74392,
+            "rowsProcessed": 74392,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 74392,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "1m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 34s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-178",
+        "status": "Succeeded",
+        "startTime": "2026-05-10T21:00:00Z",
+        "endTime": "2026-05-10T21:05:42Z",
+        "totalRecords": 7950,
+        "dpuHours": 0.14,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 74392,
+            "rowsProcessed": 74392,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 74392,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "1m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 34s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-145",
+        "status": "Failed",
+        "errorNodeId": "node-1781836704560",
+        "startTime": "2026-05-10T03:05:00Z",
+        "endTime": "2026-05-10T03:06:35Z",
+        "totalRecords": 0,
+        "dpuHours": 0.05,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 74392,
+            "rowsProcessed": 74392,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 74392,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "1m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 34s"
+          }
+        }
+      },
+      {
+        "runId": "GJ-RUN-123",
+        "status": "Succeeded",
+        "startTime": "2026-05-09T14:20:00Z",
+        "endTime": "2026-05-09T14:26:15Z",
+        "totalRecords": 8050,
+        "dpuHours": 0.15,
+        "nodeStats": {
+          "node-1781836691780": {
+            "rowsIngested": 74392,
+            "rowsProcessed": 74392,
+            "nodeExecutionTime": "0m 41s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 74392,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "1m 04s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 22s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 72918,
+            "rowsProcessed": 72918,
+            "nodeExecutionTime": "0m 34s"
+          }
         }
       },
       {
@@ -391,11 +2188,32 @@
         "totalRecords": 71245,
         "dpuHours": 0.266,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 71245, "rowsProcessed": 71245, "nodeExecutionTime": "0m 39s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 15s" },
-          "node-1781836704560": { "rowsIngestedLeft": 71245, "rowsIngestedRight": 8801, "rowsProcessed": 69812, "nodeExecutionTime": "1m 01s" },
-          "node-1781836731170": { "rowsIngested": 69812, "rowsProcessed": 69812, "nodeExecutionTime": "0m 21s" },
-          "node-1781836755171": { "rowsIngested": 69812, "rowsProcessed": 69812, "nodeExecutionTime": "0m 32s" }
+          "node-1781836691780": {
+            "rowsIngested": 71245,
+            "rowsProcessed": 71245,
+            "nodeExecutionTime": "0m 39s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 15s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 71245,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 69812,
+            "nodeExecutionTime": "1m 01s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 69812,
+            "rowsProcessed": 69812,
+            "nodeExecutionTime": "0m 21s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 69812,
+            "rowsProcessed": 69812,
+            "nodeExecutionTime": "0m 32s"
+          }
         }
       },
       {
@@ -406,11 +2224,32 @@
         "totalRecords": 79831,
         "dpuHours": 0.345,
         "nodeStats": {
-          "node-1781836691780": { "rowsIngested": 79831, "rowsProcessed": 79831, "nodeExecutionTime": "0m 44s" },
-          "node-1781836712031": { "rowsIngested": 8801,  "rowsProcessed": 8801,  "nodeExecutionTime": "0m 16s" },
-          "node-1781836704560": { "rowsIngestedLeft": 79831, "rowsIngestedRight": 8801, "rowsProcessed": 78204, "nodeExecutionTime": "1m 08s" },
-          "node-1781836731170": { "rowsIngested": 78204, "rowsProcessed": 78204, "nodeExecutionTime": "0m 23s" },
-          "node-1781836755171": { "rowsIngested": 78204, "rowsProcessed": 78204, "nodeExecutionTime": "0m 36s" }
+          "node-1781836691780": {
+            "rowsIngested": 79831,
+            "rowsProcessed": 79831,
+            "nodeExecutionTime": "0m 44s"
+          },
+          "node-1781836712031": {
+            "rowsIngested": 8801,
+            "rowsProcessed": 8801,
+            "nodeExecutionTime": "0m 16s"
+          },
+          "node-1781836704560": {
+            "rowsIngestedLeft": 79831,
+            "rowsIngestedRight": 8801,
+            "rowsProcessed": 78204,
+            "nodeExecutionTime": "1m 08s"
+          },
+          "node-1781836731170": {
+            "rowsIngested": 78204,
+            "rowsProcessed": 78204,
+            "nodeExecutionTime": "0m 23s"
+          },
+          "node-1781836755171": {
+            "rowsIngested": 78204,
+            "rowsProcessed": 78204,
+            "nodeExecutionTime": "0m 36s"
+          }
         }
       }
     ]

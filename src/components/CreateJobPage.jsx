@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
+import { useCollection } from '@cloudscape-design/collection-hooks';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import AppLayoutToolbar from '@cloudscape-design/components/app-layout-toolbar';
 import Box from '@cloudscape-design/components/box';
@@ -59,6 +60,69 @@ function formatDuration(startIso, endIso) {
   const seconds      = totalSeconds % 60;
   return minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
 }
+
+// Run duration in ms (null when start/end missing, e.g. an in-progress run).
+function runDurationMs(run) {
+  if (!run.startTime || !run.endTime) return null;
+  return new Date(run.endTime) - new Date(run.startTime);
+}
+
+// Comparator that sorts null/missing values below any real value.
+function nullableComparator(getValue) {
+  return (a, b) => {
+    const av = getValue(a);
+    const bv = getValue(b);
+    if (av == null && bv == null) return 0;
+    if (av == null) return -1;
+    if (bv == null) return 1;
+    return av < bv ? -1 : av > bv ? 1 : 0;
+  };
+}
+
+// Sortable run-history columns. Defined at module scope so the column object
+// references are stable across renders — Cloudscape matches the active sort
+// column by reference for comparator-based columns (no sortingField).
+const RUN_HISTORY_COLUMNS = [
+  {
+    id:     'runId',
+    header: 'Run ID',
+    sortingField: 'runId',
+    cell:   run => (
+      <Link href={`/runs/${run.runId}`} target="_blank" external>
+        {run.runId}
+      </Link>
+    ),
+  },
+  {
+    id:     'status',
+    header: 'Run status',
+    sortingField: 'status',
+    cell:   run => (
+      <StatusIndicator type={STATUS_TYPE_MAP[run.status] ?? 'pending'}>
+        {run.status}
+      </StatusIndicator>
+    ),
+  },
+  {
+    id:     'startTime',
+    header: 'Start time',
+    sortingComparator: nullableComparator(run => (run.startTime ? new Date(run.startTime).getTime() : null)),
+    cell:   run => formatDateTime(run.startTime),
+  },
+  {
+    id:     'endTime',
+    header: 'End time',
+    sortingComparator: nullableComparator(run => (run.endTime ? new Date(run.endTime).getTime() : null)),
+    cell:   run => formatDateTime(run.endTime),
+  },
+  {
+    id:     'duration',
+    header: 'Duration',
+    sortingComparator: nullableComparator(runDurationMs),
+    cell:   run => formatDuration(run.startTime, run.endTime),
+  },
+];
+const RUN_HISTORY_START_TIME_COLUMN = RUN_HISTORY_COLUMNS.find(c => c.id === 'startTime');
 
 function generateRunId() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -135,7 +199,7 @@ const highlightScala  = makeHighlighter('scala');
 
 const NAV_ITEMS = [
   { type: 'link', text: 'Jobs',       href: '/'          },
-  { type: 'link', text: 'Monitoring', href: '#/crawlers' },
+  { type: 'link', text: 'Monitoring', href: '/monitoring' },
   { type: 'divider' },
   { type: 'link', text: 'Settings',   href: '#/settings' },
 ];
@@ -146,6 +210,11 @@ export default function CreateJobPage() {
 
   const jobData  = JOBS.find(j => j.id === jobId) ?? null;
   const jobRuns  = jobData?.runs ?? [];
+
+  // Sorted by start time (newest first) by default.
+  const { items: sortedJobRuns, collectionProps: runCollectionProps } = useCollection(jobRuns, {
+    sorting: { defaultState: { sortingColumn: RUN_HISTORY_START_TIME_COLUMN, isDescending: true } },
+  });
 
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
@@ -639,50 +708,13 @@ object GlueApp {
             <div style={{ display: activeTabId === 'run-history' ? 'flex' : 'none', flex: 1, flexDirection: 'column', overflow: 'hidden', width: '100%', padding: '16px 24px 0 24px' }}>
               <div style={{ height: 'calc(100vh - 280px)', overflow: 'auto' }}>
                 <Table
-                  items={jobRuns}
+                  {...runCollectionProps}
+                  items={sortedJobRuns}
                   selectionType="single"
                   selectedItems={selectedRunItems}
                   onSelectionChange={({ detail }) => setSelectedRunItems(detail.selectedItems)}
                   trackBy="runId"
-                  columnDefinitions={[
-                    {
-                      id:     'runId',
-                      header: 'Run ID',
-                      cell:   run => (
-                        <Link
-                          href={`/runs/${run.runId}`}
-                          target="_blank"
-                          external
-                        >
-                          {run.runId}
-                        </Link>
-                      ),
-                    },
-                    {
-                      id:     'status',
-                      header: 'Run status',
-                      cell:   run => (
-                        <StatusIndicator type={STATUS_TYPE_MAP[run.status] ?? 'pending'}>
-                          {run.status}
-                        </StatusIndicator>
-                      ),
-                    },
-                    {
-                      id:     'startTime',
-                      header: 'Start time',
-                      cell:   run => formatDateTime(run.startTime),
-                    },
-                    {
-                      id:     'endTime',
-                      header: 'End time',
-                      cell:   run => formatDateTime(run.endTime),
-                    },
-                    {
-                      id:     'duration',
-                      header: 'Duration',
-                      cell:   run => formatDuration(run.startTime, run.endTime),
-                    },
-                  ]}
+                  columnDefinitions={RUN_HISTORY_COLUMNS}
                   header={
                     <Header
                       counter={jobRuns.length > 0 ? `(${jobRuns.length})` : undefined}
@@ -691,7 +723,7 @@ object GlueApp {
                         <SpaceBetween direction="horizontal" size="xs">
                           <Button disabled>Stop run</Button>
                           <Button disabled={selectedRunItems.length === 0}>Clone run</Button>
-                          <Button disabled={selectedRunItems.length === 0} variant="primary" iconName="external" iconAlign="right">View output in S3</Button>
+                          <Button disabled={selectedRunItems.length === 0} variant="normal" iconName="external" iconAlign="right">View output in S3</Button>
                         </SpaceBetween>
                       }
                     >
