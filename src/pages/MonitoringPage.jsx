@@ -245,6 +245,19 @@ function getDateConflict(tokens, dateRange) {
   return null;
 }
 
+// ── Shared chart empty state ──────────────────────────────────────────────────
+
+function NoDataState({ message }) {
+  return (
+    <Box textAlign="center" color="inherit" padding={{ vertical: 'l' }}>
+      <b>No data available</b>
+      <Box variant="p" color="inherit">
+        {message}
+      </Box>
+    </Box>
+  );
+}
+
 // ── Page content ──────────────────────────────────────────────────────────────
 
 function PageContent({
@@ -268,6 +281,12 @@ function PageContent({
   const dpuMax = Math.max(1, ...dpuOverTime.map((p) => p.dpuHours));
   const heatmapData = getFailureHeatmap(filteredRuns);
   const nonSuccessRuns = filteredRuns.filter((r) => r.status === 'failed' || r.status === 'stopped');
+
+  // Empty-state flags: these charts always receive fixed-size arrays (one entry
+  // per day/cell) even when there are no runs, so detect "no data" explicitly.
+  const hasRuns = filteredRuns.length > 0;
+  const hasDpu = dpuOverTime.some((p) => p.dpuHours > 0);
+  const heatmapEmpty = heatmapData.every((c) => c.totalRuns === 0);
 
   return (
     <div style={{ maxWidth: 1440, margin: '0 auto' }}>
@@ -469,14 +488,15 @@ function PageContent({
           <Container header={<Header variant="h2">Job run success rate</Header>} fitHeight>
             <PieChart
               variant="donut"
-              data={[
+              data={hasRuns ? [
                 { title: 'Succeeded', value: stats.succeeded, color: '#639922' },
                 { title: 'Failed',    value: stats.failed,    color: '#E24B4A' },
                 { title: 'Running',  value: stats.running,   color: '#378ADD' },
                 { title: 'Stopped',  value: stats.stopped,   color: '#8d99a8' },
-              ]}
+              ] : []}
               innerMetricValue={`${successRate}%`}
               innerMetricDescription="Success rate"
+              empty={<NoDataState message="No job runs in the selected period." />}
               hideFilter
               hideLegend={false}
               size="medium"
@@ -499,18 +519,19 @@ function PageContent({
             <Box color="text-status-inactive">DPU hours this period</Box>
             <div style={{ marginTop: '12px' }}>
               <LineChart
-                series={[
+                series={hasDpu ? [
                   {
                     title: 'DPU hours',
                     type: 'line',
                     data: dpuOverTime.map((p) => ({ x: p.date, y: p.dpuHours })),
                   },
-                ]}
+                ] : []}
                 xScaleType="categorical"
                 xDomain={dpuOverTime.map((p) => p.date)}
                 yDomain={[0, dpuMax]}
                 xTitle="Date"
                 yTitle="DPU Hours"
+                empty={<NoDataState message="No DPU usage in the selected period." />}
                 hideFilter
                 hideLegend
                 height={200}
@@ -540,16 +561,17 @@ function PageContent({
             >
               <BarChart
                 stackedBars
-                series={[
+                series={hasRuns ? [
                   { title: 'Succeeded', type: 'bar', data: runsByDay.map((d) => ({ x: d.date, y: d.succeeded })), color: '#639922' },
                   { title: 'Failed',    type: 'bar', data: runsByDay.map((d) => ({ x: d.date, y: d.failed    })), color: '#E24B4A' },
                   { title: 'Running',  type: 'bar', data: runsByDay.map((d) => ({ x: d.date, y: d.running   })), color: '#378ADD' },
                   { title: 'Stopped',  type: 'bar', data: runsByDay.map((d) => ({ x: d.date, y: d.stopped   })), color: '#8d99a8' },
-                ]}
+                ] : []}
                 xDomain={runsByDay.map((d) => d.date)}
                 yDomain={[0, 10]}
                 xTitle=""
                 yTitle="Runs"
+                empty={<NoDataState message="No job runs in the selected period." />}
                 hideFilter
                 height={160}
                 i18nStrings={{
@@ -566,7 +588,9 @@ function PageContent({
                 </Header>
               }
             >
-              <FailureHeatmap data={heatmapData} />
+              {heatmapEmpty
+                ? <NoDataState message="No job runs in the selected period." />
+                : <FailureHeatmap data={heatmapData} />}
             </Container>
         </Grid>
 
@@ -579,11 +603,13 @@ function PageContent({
           }
         >
           <LineChart
-            series={Object.entries(durationByJob).map(([jobName, points]) => ({
-              title: jobName,
-              type: 'line',
-              data: points.map((p) => ({ x: p.date, y: p.durationMinutes })),
-            }))}
+            series={Object.entries(durationByJob)
+              .filter(([, points]) => points.length > 0)
+              .map(([jobName, points]) => ({
+                title: jobName,
+                type: 'line',
+                data: points.map((p) => ({ x: p.date, y: p.durationMinutes })),
+              }))}
             xScaleType="categorical"
             xDomain={runsByDay.map((d) => d.date)}
             yDomain={[0, 25]}
@@ -595,6 +621,7 @@ function PageContent({
               xTickFormatter: (d) => d,
               yTickFormatter: (d) => `${d}m`,
             }}
+            empty={<NoDataState message="No run duration data in the selected period." />}
           />
         </Container>
       </div>
